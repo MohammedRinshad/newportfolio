@@ -1,70 +1,155 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const links = document.querySelectorAll('.nav-links li a');
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    const header = document.getElementById('navbar');
 
-    // Mobile Menu Toggle
+    setTimeout(() => {
+        document.querySelector('.preloader').classList.add('hidden');
+    }, 600);
+
     hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        hamburger.classList.toggle('toggle');
-        
-        // Icon Animation
-        const icon = hamburger.querySelector('i');
-        if (navLinks.classList.contains('active')) {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
-        } else {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-        }
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+        document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
     });
 
-    // Close Menu on Link Click
-    links.forEach(link => {
+    document.querySelectorAll('#navLinks a').forEach(link => {
         link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            const icon = hamburger.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
+            hamburger.classList.remove('open');
+            navLinks.classList.remove('open');
+            document.body.style.overflow = '';
         });
     });
 
-    // Smooth Scroll (Optional enhancement if native scroll-behavior is not enough)
-    // Most modern browsers handle 'scroll-behavior: smooth' in CSS well.
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 40);
+        updateActiveLink();
+    }, { passive: true });
 
-    // Intersection Observer for Fade-in Animations
-    const observerOptions = {
-        threshold: 0.1
-    };
+    const sections = document.querySelectorAll('section[id]');
+    const navAnchors = document.querySelectorAll('.nav-links .nav-link');
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('appear');
-                observer.unobserve(entry.target);
+    function updateActiveLink() {
+        const pos = window.scrollY + 120;
+        let current = '';
+        sections.forEach(section => {
+            if (pos >= section.offsetTop) {
+                current = section.id;
             }
         });
-    }, observerOptions);
+        navAnchors.forEach(anchor => {
+            anchor.classList.toggle('active', anchor.getAttribute('href') === `#${current}`);
+        });
+    }
 
-    // Elements to animate
-    const animateElements = document.querySelectorAll('.section-title, .skill-category, .project-card, .service-card, .education-card');
-    
-    animateElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
+    const roles = [
+        'Flutter Developer',
+        'Mobile App Engineer',
+        'Android & iOS Developer',
+        'Problem Solver',
+        'Tech Enthusiast'
+    ];
+    const typed = document.getElementById('typed');
+    let roleIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    function typeLoop() {
+        const current = roles[roleIndex];
+        if (!deleting) {
+            typed.textContent = current.slice(0, ++charIndex);
+            if (charIndex === current.length) {
+                deleting = true;
+                setTimeout(typeLoop, 1900);
+                return;
+            }
+            setTimeout(typeLoop, 75);
+        } else {
+            typed.textContent = current.slice(0, --charIndex);
+            if (charIndex === 0) {
+                deleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+            }
+            setTimeout(typeLoop, 42);
+        }
+    }
+    typeLoop();
+
+    const statusEl = document.getElementById('statusText');
+    const statuses = ['Compiling…', 'Refactoring…', 'Unit tests passed ✓', 'Deploying 🚀', 'All systems go'];
+    let sIndex = 0;
+    setInterval(() => {
+        sIndex = (sIndex + 1) % statuses.length;
+        statusEl.textContent = statuses[sIndex];
+    }, 2600);
+
+    const countTargets = document.querySelectorAll('.stat-num[data-count]');
+    function runCounter(el) {
+        const target = parseInt(el.dataset.count, 10);
+        const duration = 1600;
+        const start = performance.now();
+        function tick(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.floor(eased * target);
+            if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+    }
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                if (entry.target.classList.contains('stat-num')) {
+                    runCounter(entry.target);
+                }
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('[data-reveal]').forEach(el => {
+        revealObserver.observe(el);
     });
 
-    // Add 'appear' class style dynamically or rely on Inline styles + class addition logic
-    // We'll use a simple approach here where adding the class resets the styles
-    const styleSheet = document.createElement("style");
-    styleSheet.classList.add("dynamic-animations");
-    styleSheet.innerText = `
-        .appear {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-    `;
-    document.head.appendChild(styleSheet);
+    const barObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll('.bar span').forEach(bar => {
+                    bar.style.width = bar.getAttribute('style').match(/width:(\d+)%/)[1] + '%';
+                });
+                barObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.skill-card').forEach(card => {
+        barObserver.observe(card);
+    });
+
+    document.querySelectorAll('.skill-card, .service-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--my', `${e.clientY - rect.top}px`);
+        });
+    });
+
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        const btn = form.querySelector('.submit-btn');
+        const original = btn.innerHTML;
+        btn.innerHTML = '<span>Sending...</span><i class="fas fa-spinner fa-spin"></i>';
+        btn.disabled = true;
+        setTimeout(() => {
+            btn.innerHTML = '<span>Message Sent!</span><i class="fas fa-check"></i>';
+            form.reset();
+            setTimeout(() => {
+                btn.innerHTML = original;
+                btn.disabled = false;
+            }, 2600);
+        }, 1400);
+    });
 });

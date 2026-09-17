@@ -7,27 +7,47 @@
     <title>Mohammed Rinshad MT | Flutter Developer</title>
     <meta name="description"
         content="Portfolio of Mohammed Rinshad MT, a Flutter Developer specializing in scalable mobile applications for Android and iOS.">
-    <link rel="stylesheet" href="style.css?v=7">
+    <link rel="stylesheet" href="style.css?v=3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-    <header>
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-orb"></div>
+            <span>Loading<span class="dots"></span></span>
+        </div>
+    </div>
+
+    <div class="bg-aurora">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <header id="navbar">
         <nav class="container">
-            <a href="#" class="logo">MR.</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact" class="btn-primary">Contact Me</a></li>
+            <a href="#hero" class="logo">
+                <span class="logo-mark">M</span>
+                <span class="logo-text">rinshad.<span class="accent-dot">dev</span></span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#contact" class="btn-primary nav-cta">Let's Talk</a></li>
             </ul>
-            <div class="hamburger">
-                <i class="fas fa-bars"></i>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </nav>
     </header>
@@ -37,380 +57,603 @@
         <section id="hero">
             <div class="container hero-content">
                 <div class="hero-text">
-                    <span class="greeting">Hello, I'm</span>
-                    <h1>Mohammed Rinshad MT</h1>
-                    <h2>Flutter Developer | Mobile Application Engineer</h2>
-                    <p>Building scalable, secure, and production-ready mobile applications for Android and iOS using
-                        Flutter.</p>
-                    <div class="hero-btns">
-                        <a href="#projects" class="btn-primary">View My Work</a>
-                        <a href="#contact" class="btn-secondary">Let's Talk</a>
+                    <span class="greeting" data-reveal>
+                        <span class="greeting-line"></span> Hello, I'm
+                    </span>
+                    <h1 data-reveal>
+                        Mohammed<br>Rinshad <span class="gradient-text">MT</span>
+                    </h1>
+                    <h2 class="typed-wrap" data-reveal>
+                        <span class="typed-caret"></span><span id="typed"></span>
+                    </h2>
+                    <p data-reveal>
+                        I craft scalable, secure, and production-ready mobile applications for Android &amp; iOS using
+                        Flutter — clean code, delightful experiences.
+                    </p>
+                    <div class="hero-btns" data-reveal>
+                        <a href="#projects" class="btn-primary"><i class="fas fa-code"></i> View My Work</a>
+                        <a href="#contact" class="btn-ghost"><i class="fas fa-paper-plane"></i> Let's Talk</a>
                     </div>
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/md-rinshad/" target="_blank"><i
-                                class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/MohammedRinshad" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="mailto:rinshadmt20@gmail.com"><i class="fas fa-envelope"></i></a>
+                    <div class="social-links" data-reveal>
+                        <a href="https://www.linkedin.com/in/md-rinshad/" target="_blank" aria-label="LinkedIn"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/MohammedRinshad" target="_blank" aria-label="GitHub"><i
+                                class="fab fa-github"></i></a>
+                        <a href="mailto:rinshadmt20@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
                     </div>
-                    <div class="location">
-                        <i class="fas fa-map-marker-alt"></i> Pattambi, Kerala, India
+                    <div class="hero-stats" data-reveal>
+                        <div class="stat">
+                            <span class="stat-num" data-count="3">0</span><span class="stat-plus">+</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-num" data-count="13">0</span><span class="stat-plus">+</span>
+                            <span class="stat-label">Apps Shipped</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-num stat-plain">2</span>
+                            <span class="stat-label">Platforms</span>
+                        </div>
                     </div>
                 </div>
-                <!-- Interactive element or 3D graphic could go here -->
-                <div class="hero-visual">
-                    <div class="code-block">
+                <div class="hero-visual" data-reveal>
+                    <div class="code-card">
+                        <div class="code-card-head">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span class="code-title">rinshad.dart</span>
+                        </div>
                         <pre>
 <span class="keyword">class</span> <span class="class-name">Developer</span> {
-  <span class="type">String</span> name = <span class="string">"Mohammed Rinshad MT"</span>;
-  <span class="type">String</span> role = <span class="string">"Flutter Developer"</span>;
-  <span class="type">int</span> experience = <span class="number">3</span>;
-  
+  <span class="type">String</span> name = <span class="string">"Rinshad MT"</span>;
+  <span class="type">String</span> role = <span class="string">"Flutter Dev"</span>;
+
   <span class="keyword">void</span> <span class="function">buildAwesomeApps</span>() {
-    print(<span class="string">"Building Scalable Solutions..."</span>);
+    print(<span class="string">"🚀 Building Scalable Solutions..."</span>);
   }
-}
-                        </pre>
+}</pre>
+                        <div class="code-card-status">
+                            <span class="status-peek"></span> <span class="status-text" id="statusText"></span>
+                        </div>
+                    </div>
+                    <div class="floating-chip chip-1"><i class="fab fa-flutter"></i> Flutter</div>
+                    <div class="floating-chip chip-2"><i class="fas fa-rocket"></i> 3+ Years</div>
+                    <div class="floating-chip chip-3"><i class="fas fa-mobile-alt"></i> Android · iOS</div>
+                </div>
+            </div>
+            <a href="#about" class="scroll-hint" aria-label="Scroll down">
+                <span class="mouse">
+                    <span class="wheel"></span>
+                </span>
+            </a>
+        </section>
+
+        <!-- Marquee -->
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-track">
+                <span>Flutter</span><i class="fab fa-flutter"></i>
+                <span>Dart</span><i class="fas fa-code"></i>
+                <span>Riverpod</span><i class="fas fa-layer-group"></i>
+                <span>Provider</span><i class="fas fa-boxes"></i>
+                <span>Bloc</span><i class="fas fa-project-diagram"></i>
+                <span>GetX</span><i class="fas fa-bolt"></i>
+                <span>Firebase</span><i class="fas fa-fire"></i>
+                <span>Agora</span><i class="fas fa-video"></i>
+                <span>Razorpay</span><i class="fas fa-credit-card"></i>
+                <span>CI / CD</span><i class="fas fa-infinity"></i>
+                <span>Flutter</span><i class="fab fa-flutter"></i>
+                <span>Dart</span><i class="fas fa-code"></i>
+                <span>Riverpod</span><i class="fas fa-layer-group"></i>
+                <span>Provider</span><i class="fas fa-boxes"></i>
+                <span>Bloc</span><i class="fas fa-project-diagram"></i>
+                <span>GetX</span><i class="fas fa-bolt"></i>
+                <span>Firebase</span><i class="fas fa-fire"></i>
+                <span>Agora</span><i class="fas fa-video"></i>
+                <span>Razorpay</span><i class="fas fa-credit-card"></i>
+                <span>CI / CD</span><i class="fas fa-infinity"></i>
+            </div>
+        </div>
+
+        <!-- About -->
+        <section id="about" class="section">
+            <div class="container">
+                <div class="section-head" data-reveal>
+                    <span class="section-tag">01 · About</span>
+                    <h2 class="section-title">Passionate about building <span class="gradient-text">great apps</span>
+                    </h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-text" data-reveal>
+                        <p>I am a Flutter Developer with over 3 years of professional experience in building,
+                            maintaining, and deploying high-quality cross-platform mobile applications for Android and
+                            iOS. I specialize in writing clean, scalable, and maintainable code, with strong expertise
+                            in Flutter, Dart, and modern state management solutions.</p>
+                        <p>I have worked extensively on healthcare, fintech, agriculture, and education applications,
+                            integrating advanced features such as real-time video calling, secure payment gateways,
+                            push notifications, and cloud-based backend services — managing end-to-end app lifecycles,
+                            from development to Play Store and App Store deployment.</p>
+                        <div class="quick-facts">
+                            <div class="fact"><i class="fas fa-map-marker-alt"></i> Pattambi, Kerala, India</div>
+                            <div class="fact"><i class="fas fa-graduation-cap"></i> MCA — University of Calicut</div>
+                            <div class="fact"><i class="fas fa-tasks"></i> Agile / Scrum</div>
+                            <div class="fact"><i class="fas fa-globe"></i> English · Malayalam</div>
+                        </div>
+                    </div>
+                    <div class="about-cards" data-reveal>
+                        <div class="edu-card glow-card">
+                            <div class="edu-card-head"><i class="fas fa-graduation-cap"></i> Education</div>
+                            <div class="edu-item">
+                                <h4>Master of Computer Applications</h4>
+                                <p>University of Calicut — 2018–2021</p>
+                                <span class="badge">CGPA 7.3</span>
+                            </div>
+                            <div class="edu-item">
+                                <h4>Bachelor of Computer Applications</h4>
+                                <p>University of Calicut — 2015–2018</p>
+                                <span class="badge">CGPA 6.3</span>
+                            </div>
+                        </div>
+                        <div class="focus-card glow-card">
+                            <div class="edu-card-head"><i class="fas fa-bullseye"></i> What I do</div>
+                            <div class="focus-item"><span>⌨️</span> Write clean, testable Flutter code</div>
+                            <div class="focus-item"><span>🔐</span> Ship secure, data-safe apps</div>
+                            <div class="focus-item"><span>🚀</span> Deploy to Play &amp; App Store</div>
+                            <div class="focus-item"><span>📈</span> Optimize performance &amp; UX</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="content-wrapper container">
-            <aside class="profile-sidebar">
-                <!-- About Section -->
-                <section id="about" class="section">
-                    <div class="container-fluid"> <!-- Changed to fluid or simple div since it's inside a wrapper -->
-                        <h2 class="section-title-small">About Me</h2>
-                        <div class="about-content-sidebar">
-                            <div class="about-text">
-                                <p>I am a Flutter Developer with over 3 years of professional experience in building,
-                                    maintaining, and deploying high-quality cross-platform mobile applications for
-                                    Android and iOS. I specialize in writing clean, scalable, and maintainable code,
-                                    with strong expertise in Flutter, Dart, and modern state management solutions.</p>
-                                <p>I have worked extensively on healthcare, fintech, agriculture, and education
-                                    applications, integrating advanced features such as real-time video calling, secure
-                                    payment gateways, push notifications, and cloud-based backend services. I have
-                                    hands-on experience managing end-to-end app lifecycles, from development to Play
-                                    Store and App Store deployment.</p>
-                            </div>
-                            <div class="education-card">
-                                <h3><i class="fas fa-graduation-cap"></i> Education</h3>
-                                <div class="edu-item">
-                                    <h4>Master of Computer Applications (MCA)</h4>
-                                    <p>University of Calicut — 2018–2021</p>
-                                    <span class="grade">CGPA: 7.3</span>
-                                </div>
-                                <div class="edu-item">
-                                    <h4>Bachelor of Computer Applications (BCA)</h4>
-                                    <p>University of Calicut — 2015–2018</p>
-                                    <span class="grade">CGPA: 6.3</span>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Skills -->
+        <section id="skills" class="section alt">
+            <div class="container">
+                <div class="section-head" data-reveal>
+                    <span class="section-tag">02 · Skills</span>
+                    <h2 class="section-title">My <span class="gradient-text">technical toolbox</span></h2>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-card" data-reveal>
+                        <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h3>Mobile Development</h3>
+                        <ul>
+                            <li><span>Flutter</span><div class="bar"><span style="width:95%"></span></div></li>
+                            <li><span>Dart</span><div class="bar"><span style="width:92%"></span></div></li>
+                            <li><span>Android Studio</span><div class="bar"><span style="width:90%"></span></div></li>
+                            <li><span>Xcode</span><div class="bar"><span style="width:82%"></span></div></li>
+                        </ul>
                     </div>
-                </section>
-
-                <!-- Skills Section -->
-                <section id="skills" class="section bg-alt-sidebar">
-                    <div class="container-fluid">
-                        <h2 class="section-title-small">Technical Skills</h2>
-                        <div class="skills-grid-sidebar">
-                            <div class="skill-category">
-                                <h3><i class="fas fa-mobile-alt"></i> Mobile Development</h3>
-                                <ul>
-                                    <li>Flutter</li>
-                                    <li>Dart</li>
-                                    <li>Android Studio</li>
-                                    <li>Xcode</li>
-                                </ul>
-                            </div>
-                            <div class="skill-category">
-                                <h3><i class="fas fa-layer-group"></i> State Management</h3>
-                                <ul>
-                                    <li>Riverpod</li>
-                                    <li>Provider</li>
-                                    <li>Bloc / BLoC</li>
-                                    <li>GetX</li>
-                                </ul>
-                            </div>
-                            <div class="skill-category">
-                                <h3><i class="fas fa-server"></i> Backend & Cloud</h3>
-                                <ul>
-                                    <li>Firebase Auth & Cloud Messaging</li>
-                                    <li>Firestore & Realtime Database</li>
-                                    <li>RESTful API Integration</li>
-                                    <li>AWS SNS</li>
-                                </ul>
-                            </div>
-                            <div class="skill-category">
-                                <h3><i class="fas fa-credit-card"></i> Payments & Comms</h3>
-                                <ul>
-                                    <li>Razorpay & Stripe</li>
-                                    <li>Agora (Video & Real-Time)</li>
-                                </ul>
-                            </div>
-                            <div class="skill-category">
-                                <h3><i class="fas fa-tools"></i> Tools & Workflow</h3>
-                                <ul>
-                                    <li>GitHub & GitLab</li>
-                                    <li>CI/CD Pipelines</li>
-                                    <li>Agile / Scrum</li>
-                                </ul>
-                            </div>
-                            <div class="skill-category">
-                                <h3><i class="fas fa-sitemap"></i> Architecture</h3>
-                                <ul>
-                                    <li>MVVM Architecture</li>
-                                    <li>Scalable Architecture</li>
-                                    <li>Secure Data Handling</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="skill-card" data-reveal>
+                        <div class="skill-icon"><i class="fas fa-layer-group"></i></div>
+                        <h3>State Management</h3>
+                        <ul>
+                            <li><span>Riverpod</span><div class="bar"><span style="width:90%"></span></div></li>
+                            <li><span>Provider</span><div class="bar"><span style="width:92%"></span></div></li>
+                            <li><span>Bloc / BLoC</span><div class="bar"><span style="width:85%"></span></div></li>
+                            <li><span>GetX</span><div class="bar"><span style="width:88%"></span></div></li>
+                        </ul>
                     </div>
-                </section>
-            </aside>
-
-            <div class="main-content">
-                <!-- Experience Section -->
-                <section id="experience" class="section">
-                    <div class="container-fluid">
-                        <h2 class="section-title">Professional Experience</h2>
-                        <div class="timeline">
-                            <!-- Job 1 -->
-                            <div class="timeline-item">
-                                <div class="timeline-icon"><i class="fas fa-briefcase"></i></div>
-                                <div class="timeline-content">
-                                    <h3>Flutter Developer</h3>
-                                    <h4><a href="https://www.globalhealthopinion.com/" target="_blank" rel="noopener noreferrer">GHO Technologies Private Limited</a> — Kochi, Kerala</h4>
-                                    <span class="timeline-date">Aug 2024 – Present</span>
-                                    <ul>
-                                        <li>Developing and maintaining cross-platform Flutter applications for Android
-                                            and iOS.</li>
-                                        <li>Implemented push notification systems using Firebase Cloud Messaging and AWS
-                                            SNS.</li>
-                                        <li>Integrated secure online payment gateways including Razorpay and Stripe.
-                                        </li>
-                                        <li>Developed video consultation features using Agora for telemedicine
-                                            applications.</li>
-                                        <li>Applied Riverpod, GetX, and Provider for scalable and maintainable state management.
-                                        </li>
-                                        <li>Implemented enhanced data security mechanisms to protect sensitive user
-                                            information.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Job 2 -->
-                            <div class="timeline-item">
-                                <div class="timeline-icon"><i class="fas fa-briefcase"></i></div>
-                                <div class="timeline-content">
-                                    <h3>Flutter Developer</h3>
-                                    <h4><a href="https://simplifyagri.com/" target="_blank" rel="noopener noreferrer">Simplify Agri Private Limited</a> — Palakkad, Kerala</h4>
-                                    <span class="timeline-date">Jun 2022 – Jun 2024</span>
-                                    <ul>
-                                        <li>Built and deployed Flutter applications focused on agriculture and service
-                                            platforms.</li>
-                                        <li>Integrated backend systems and REST APIs.</li>
-                                        <li>Used Provider and Bloc for clean and scalable application architecture.</li>
-                                        <li>Managed Google Play Store and Apple App Store releases.</li>
-                                        <li>Set up and maintained CI/CD pipelines for automated builds and deployments.
-                                        </li>
-                                        <li>Worked closely with designers to ensure accurate UI/UX implementation.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Job 3 -->
-                            <div class="timeline-item">
-                                <div class="timeline-icon"><i class="fas fa-briefcase"></i></div>
-                                <div class="timeline-content">
-                                    <h3>Junior Flutter Developer</h3>
-                                    <h4><a href="https://www.linkedin.com/company/binatestation/" target="_blank" rel="noopener noreferrer">Binate Station Private Limited</a> — Kochi, Kerala</h4>
-                                    <span class="timeline-date">Feb 2022 – Jun 2022</span>
-                                    <ul>
-                                        <li>Optimized app performance across multiple devices and screen sizes.</li>
-                                        <li>Debugged and resolved production issues efficiently.</li>
-                                        <li>Worked in an Agile Scrum environment, participating in sprints and
-                                            retrospectives.</li>
-                                        <li>Followed MVVM architecture and Flutter best practices.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Internship -->
-                            <div class="timeline-item">
-                                <div class="timeline-icon"><i class="fas fa-laptop-code"></i></div>
-                                <div class="timeline-content">
-                                    <h3>Junior Flutter Developer (Intern)</h3>
-                                    <h4><a href="https://www.ralfiz.com/" target="_blank" rel="noopener noreferrer">Ralfiz Technologies Pvt Ltd</a> — Malappuram, Kerala</h4>
-                                    <span class="timeline-date">Aug 2021 – Jan 2022</span>
-                                    <ul>
-                                        <li>Explored and implemented Flutter widgets for Android and iOS.</li>
-                                        <li>Integrated Firebase services including authentication, cloud storage, and
-                                            databases.</li>
-                                        <li>Worked with third-party libraries and APIs to extend app functionality.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="skill-card" data-reveal>
+                        <div class="skill-icon"><i class="fas fa-server"></i></div>
+                        <h3>Backend &amp; Cloud</h3>
+                        <ul>
+                            <li><span>Firebase Auth &amp; FCM</span><div class="bar"><span style="width:93%"></span></div></li>
+                            <li><span>Firestore &amp; Realtime DB</span><div class="bar"><span style="width:90%"></span></div></li>
+                            <li><span>RESTful APIs</span><div class="bar"><span style="width:94%"></span></div></li>
+                            <li><span>AWS SNS</span><div class="bar"><span style="width:80%"></span></div></li>
+                        </ul>
                     </div>
-                </section>
-
-                <!-- Projects Section -->
-                <section id="projects" class="section bg-alt">
-                    <div class="container-fluid">
-                        <h2 class="section-title">Featured Projects</h2>
-                        <div class="projects-grid">
-                            <!-- Project 1 -->
-                            <div class="project-card">
-                                <div class="project-info">
-                                    <h3>PRx.Care</h3>
-                                    <p>Healthcare scheduling and patient journey management application.</p>
-                                    <div class="tags">
-                                        <span>Flutter</span><span>Firebase</span><span>Riverpod</span><span>GetX</span><span>AWS SNS</span>
-                                    </div>
-                                    <!-- <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a> -->
-                                </div>
-                            </div>
-                            <!-- Project 2 -->
-                            <div class="project-card">
-                                <div class="project-info">
-                                    <h3>PRx Assist</h3>
-                                    <p>Hospital patient management application for nurses.</p>
-                                    <div class="tags">
-                                        <span>Flutter</span><span>Firebase</span><span>Riverpod</span><span>Provider</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Project 3 -->
-                            <div class="project-card">
-                                <div class="project-info">
-                                    <h3>Global Health Opinion</h3>
-                                    <p>Medical second-opinion and expert review platform.</p>
-                                    <div class="tags">
-                                        <span>Flutter</span><span>Firebase</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Project 4 -->
-                            <div class="project-card">
-                                <div class="project-info">
-                                    <h3>GHORx</h3>
-                                    <p>Doctor-focused application for reviewing patient cases.</p>
-                                    <div class="tags">
-                                        <span>Flutter</span><span>Firebase</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Project 5 -->
-                            <div class="project-card">
-                                <div class="project-info">
-                                    <h3>Big Dance Centre</h3>
-                                    <p>Dance academy management and class booking application.</p>
-                                    <div class="tags">
-                                        <span>Flutter</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Project 6 -->
-                            <div class="project-card">
-                                <div class="project-info">
-                                    <h3>LazyPay</h3>
-                                    <p>Fintech credit and instant loan application.</p>
-                                    <div class="tags">
-                                        <span>Flutter</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Project 7 -->
-                            <div class="project-card">
-                                <div class="project-info">
-                                    <h3>Crop Clinic</h3>
-                                    <p>Agriculture support application for farmers.</p>
-                                    <div class="tags">
-                                        <span>Flutter</span><span>Firebase</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="skill-card" data-reveal>
+                        <div class="skill-icon"><i class="fas fa-credit-card"></i></div>
+                        <h3>Monetization &amp; Comms</h3>
+                        <ul>
+                            <li><span>Razorpay</span><div class="bar"><span style="width:88%"></span></div></li>
+                            <li><span>Stripe</span><div class="bar"><span style="width:85%"></span></div></li>
+                            <li><span>Agora Video</span><div class="bar"><span style="width:86%"></span></div></li>
+                        </ul>
                     </div>
-                </section>
-
-                <!-- Services Section -->
-                <section id="services" class="section">
-                    <div class="container-fluid">
-                        <h2 class="section-title">Services</h2>
-                        <div class="services-grid">
-                            <div class="service-card">
-                                <div class="icon"><i class="fas fa-mobile"></i></div>
-                                <h3>Mobile App Development</h3>
-                                <p>Building high-performance, cross-platform mobile apps for iOS and Android using
-                                    Flutter.</p>
-                            </div>
-                            <div class="service-card">
-                                <div class="icon"><i class="fas fa-server"></i></div>
-                                <h3>Backend Integration</h3>
-                                <p>Seamlessly integrating RESTful APIs, Firebase, and AWS services into mobile
-                                    applications.</p>
-                            </div>
-                            <div class="service-card">
-                                <div class="icon"><i class="fas fa-video"></i></div>
-                                <h3>Real-time Features</h3>
-                                <p>Implementing video calling (Agora), chat, and real-time data sync for dynamic user
-                                    experiences.</p>
-                            </div>
-                            <div class="service-card">
-                                <div class="icon"><i class="fas fa-rocket"></i></div>
-                                <h3>App Deployment</h3>
-                                <p>Managing the full lifecycle from development to publishing on Google Play Store and
-                                    Apple App Store.</p>
-                            </div>
-                        </div>
+                    <div class="skill-card" data-reveal>
+                        <div class="skill-icon"><i class="fas fa-tools"></i></div>
+                        <h3>Tools &amp; Workflow</h3>
+                        <ul>
+                            <li><span>GitHub &amp; GitLab</span><div class="bar"><span style="width:92%"></span></div></li>
+                            <li><span>CI/CD Pipelines</span><div class="bar"><span style="width:84%"></span></div></li>
+                            <li><span>Agile / Scrum</span><div class="bar"><span style="width:90%"></span></div></li>
+                        </ul>
                     </div>
-                </section>
-
-                <!-- Contact Section -->
-                <section id="contact" class="section bg-alt">
-                    <div class="container-fluid">
-                        <h2 class="section-title">Get In Touch</h2>
-                        <div class="contact-content">
-                            <div class="contact-info">
-                                <p>If you’re looking for a Flutter Developer to build reliable, scalable, and
-                                    high-performance mobile applications, feel free to reach out.</p>
-                                <div class="info-item">
-                                    <i class="fas fa-envelope"></i>
-                                    <a href="mailto:rinshadmt20@gmail.com">rinshadmt20@gmail.com</a>
-                                </div>
-                                <div class="info-item">
-                                    <i class="fas fa-phone-alt"></i>
-                                    <a href="tel:+919048572066">+91 9048572066</a>
-                                </div>
-                                <div class="social-links-big">
-                                    <a href="https://www.linkedin.com/in/md-rinshad/" target="_blank"><i
-                                            class="fab fa-linkedin"></i> LinkedIn</a>
-                                    <a href="https://github.com/MohammedRinshad" target="_blank"><i
-                                            class="fab fa-github"></i> GitHub</a>
-                                </div>
-                            </div>
-                            <form class="contact-form">
-                                <div class="form-group">
-                                    <input type="text" placeholder="Your Name" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" placeholder="Your Email" required>
-                                </div>
-                                <div class="form-group">
-                                    <textarea placeholder="Your Message" rows="5" required></textarea>
-                                </div>
-                                <button type="submit" class="btn-primary">Send Message</button>
-                            </form>
-                        </div>
+                    <div class="skill-card" data-reveal>
+                        <div class="skill-icon"><i class="fas fa-sitemap"></i></div>
+                        <h3>Architecture</h3>
+                        <ul>
+                            <li><span>MVVM</span><div class="bar"><span style="width:93%"></span></div></li>
+                            <li><span>Scalable Architecture</span><div class="bar"><span style="width:88%"></span></div></li>
+                            <li><span>Secure Data Handling</span><div class="bar"><span style="width:90%"></span></div></li>
+                        </ul>
                     </div>
-                </section>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="section">
+            <div class="container">
+                <div class="section-head" data-reveal>
+                    <span class="section-tag">03 · Experience</span>
+                    <h2 class="section-title">Where I've <span class="gradient-text">worked</span></h2>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item" data-reveal>
+                        <div class="timeline-dot"><i class="fas fa-briefcase"></i></div>
+                        <div class="timeline-content">
+                            <div class="timeline-head">
+                                <div>
+                                    <h3>Flutter Developer</h3>
+                                    <h4><a href="https://www.globalhealthopinion.com/" target="_blank"
+                                            rel="noopener noreferrer">GHO Technologies Private Limited</a> — Kochi,
+                                        Kerala</h4>
+                                </div>
+                                <span class="timeline-date">Aug 2024 – Present</span>
+                            </div>
+                            <ul>
+                                <li>Developing and maintaining cross-platform Flutter applications for Android and
+                                    iOS.</li>
+                                <li>Implemented push notification systems using Firebase Cloud Messaging and AWS SNS.</li>
+                                <li>Integrated secure payment gateways including Razorpay and Stripe.</li>
+                                <li>Built video consultation features using Agora for telemedicine applications.</li>
+                                <li>Applied Riverpod, GetX, and Provider for scalable state management.</li>
+                                <li>Implemented enhanced data security mechanisms to protect sensitive user data.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-reveal>
+                        <div class="timeline-dot"><i class="fas fa-briefcase"></i></div>
+                        <div class="timeline-content">
+                            <div class="timeline-head">
+                                <div>
+                                    <h3>Flutter Developer</h3>
+                                    <h4><a href="https://simplifyagri.com/" target="_blank"
+                                            rel="noopener noreferrer">Simplify Agri Private Limited</a> — Palakkad,
+                                        Kerala</h4>
+                                </div>
+                                <span class="timeline-date">Jun 2022 – Jun 2024</span>
+                            </div>
+                            <ul>
+                                <li>Built and deployed Flutter apps focused on agriculture and service platforms.</li>
+                                <li>Integrated backend systems and REST APIs.</li>
+                                <li>Used Provider and Bloc for clean, scalable architecture.</li>
+                                <li>Managed Google Play Store and Apple App Store releases.</li>
+                                <li>Set up CI/CD pipelines for automated builds and deployments.</li>
+                                <li>Worked closely with designers for accurate UI/UX implementation.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-reveal>
+                        <div class="timeline-dot"><i class="fas fa-briefcase"></i></div>
+                        <div class="timeline-content">
+                            <div class="timeline-head">
+                                <div>
+                                    <h3>Junior Flutter Developer</h3>
+                                    <h4><a href="https://www.linkedin.com/company/binatestation/" target="_blank"
+                                            rel="noopener noreferrer">Binate Station Private Limited</a> — Kochi,
+                                        Kerala</h4>
+                                </div>
+                                <span class="timeline-date">Feb 2022 – Jun 2022</span>
+                            </div>
+                            <ul>
+                                <li>Optimized app performance across multiple devices and screen sizes.</li>
+                                <li>Debugged and resolved production issues efficiently.</li>
+                                <li>Worked in an Agile Scrum environment, participating in sprints and retrospectives.
+                                </li>
+                                <li>Followed MVVM architecture and Flutter best practices.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-reveal>
+                        <div class="timeline-dot"><i class="fas fa-laptop-code"></i></div>
+                        <div class="timeline-content">
+                            <div class="timeline-head">
+                                <div>
+                                    <h3>Junior Flutter Developer <span class="intern-badge">Intern</span></h3>
+                                    <h4><a href="https://www.ralfiz.com/" target="_blank"
+                                            rel="noopener noreferrer">Ralfiz Technologies Pvt Ltd</a> — Malappuram,
+                                        Kerala</h4>
+                                </div>
+                                <span class="timeline-date">Aug 2021 – Jan 2022</span>
+                            </div>
+                            <ul>
+                                <li>Explored and implemented Flutter widgets for Android and iOS.</li>
+                                <li>Integrated Firebase services: authentication, cloud storage, and databases.</li>
+                                <li>Worked with third-party libraries and APIs to extend app functionality.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects" class="section alt">
+            <div class="container">
+                <div class="section-head" data-reveal>
+                    <span class="section-tag">04 · Projects</span>
+                    <h2 class="section-title">Featured <span class="gradient-text">work</span></h2>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card project-featured" data-reveal>
+                        <div class="project-top">
+                            <span class="app-icon-wrap"><img src="images/mallu-cafe-radio.png"
+                                    alt="Mallu Cafe Radio USA app icon" class="app-icon"></span>
+                            <span class="project-type"><i class="fas fa-radio"></i> Audio Streaming</span>
+                        </div>
+                        <h3>Mallu Cafe Radio <span class="intern-badge">USA</span></h3>
+                        <p>Audio streaming application to stream radio, music, and shows in multiple languages for
+                            Malayalis worldwide.</p>
+                        <div class="tags">
+                            <span>Flutter</span><span>Audio Streaming</span><span>Firebase</span>
+                        </div>
+                        <a href="https://play.google.com/store/apps/details?id=com.gho.mallucafe" target="_blank"
+                            rel="noopener noreferrer" class="play-store-link"><i class="fab fa-google-play"></i> Get it
+                            on Google Play</a>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-top">
+                            <span class="app-icon-wrap"><img src="images/aabindassist.png"
+                                    alt="Aabind Connect app icon" class="app-icon"></span><span
+                                class="project-type"><i class="fas fa-hospital-user"></i> Healthcare</span>
+                        </div>
+                        <h3>Aabind Connect</h3>
+                        <p>Used to manage hospital management efficiently.</p>
+                        <div class="tags"><span>Flutter</span><span>Firebase</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.gho.aabindassist" target="_blank"
+                            rel="noopener noreferrer" class="play-store-link"><i class="fab fa-google-play"></i> Get
+                            it on Google Play</a>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-top">
+                            <span class="app-icon-wrap"><img src="images/aabindhospital.png"
+                                    alt="Aabind Hospital app icon" class="app-icon"></span><span
+                                class="project-type"><i class="fas fa-hospital"></i> Healthcare</span>
+                        </div>
+                        <h3>Aabind Hospital</h3>
+                        <p>The official portal for Aabind Hospital.</p>
+                        <div class="tags"><span>Flutter</span><span>Firebase</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.hostune.aabindhospital"
+                            target="_blank" rel="noopener noreferrer" class="play-store-link"><i
+                                class="fab fa-google-play"></i> Get it on Google Play</a>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-top">
+                            <span class="app-icon-wrap"><img src="images/prx-care.png" alt="PRx.Care app icon"
+                                    class="app-icon"></span><span class="project-type"><i class="fas fa-heartbeat"></i>
+                                Healthcare</span>
+                        </div>
+                        <h3>PRx.Care</h3>
+                        <p>Healthcare scheduling and patient journey management application.</p>
+                        <div class="tags">
+                            <span>Flutter</span><span>Firebase</span><span>Riverpod</span><span>GetX</span><span>AWS
+                                SNS</span>
+                        </div>
+                        <a href="https://play.google.com/store/apps/details?id=prx.care.patient_journey"
+                            target="_blank" rel="noopener noreferrer" class="play-store-link"><i
+                                class="fab fa-google-play"></i> Get it on Google Play</a>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-top">
+                            <span class="app-icon-wrap"><img src="images/prx-assist.png" alt="PRx Assist app icon"
+                                    class="app-icon"></span><span class="project-type"><i class="fas fa-user-nurse"></i>
+                                Healthcare</span>
+                        </div>
+                        <h3>PRx Assist</h3>
+                        <p>Hospital patient management application for nurses.</p>
+                        <div class="tags">
+                            <span>Flutter</span><span>Firebase</span><span>Riverpod</span><span>Provider</span>
+                        </div>
+                        <a href="https://play.google.com/store/apps/details?id=care.gho.patientJourneyManagementNurse"
+                            target="_blank" rel="noopener noreferrer" class="play-store-link"><i
+                                class="fab fa-google-play"></i> Get it on Google Play</a>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-top">
+                            <span class="app-icon-wrap"><img src="images/son.png" alt="SON app icon"
+                                    class="app-icon"></span><span class="project-type"><i class="fas fa-stethoscope"></i>
+                                MedTech</span>
+                        </div>
+                        <h3>SON</h3>
+                        <p>Medical second-opinion and expert review platform.</p>
+                        <div class="tags"><span>Flutter</span><span>Firebase</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=in.globalhealthopinion"
+                            target="_blank" rel="noopener noreferrer" class="play-store-link"><i
+                                class="fab fa-google-play"></i> Get it on Google Play</a>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-top">
+                            <span class="app-icon-wrap"><img src="images/ghorx.png" alt="GHORx app icon"
+                                    class="app-icon"></span><span class="project-type"><i class="fas fa-user-md"></i>
+                                MedTech</span>
+                        </div>
+                        <h3>GHORx</h3>
+                        <p>Doctor-focused application for reviewing patient cases.</p>
+                        <div class="tags"><span>Flutter</span><span>Firebase</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=in.globalhealthopinionrx"
+                            target="_blank" rel="noopener noreferrer" class="play-store-link"><i
+                                class="fab fa-google-play"></i> Get it on Google Play</a>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-top">
+                            <span class="app-icon-wrap"><img src="images/apollomuscat.png"
+                                    alt="ApolloMuscat app icon" class="app-icon"></span><span class="project-type"><i
+                                    class="fas fa-calendar-check"></i> Healthcare</span>
+                        </div>
+                        <h3>ApolloMuscat</h3>
+                        <p>Appointment booking and healthcare management application.</p>
+                        <div class="tags"><span>Flutter</span><span>Firebase</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.gho.apollo" target="_blank"
+                            rel="noopener noreferrer" class="play-store-link"><i class="fab fa-google-play"></i> Get it
+                            on Google Play</a>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-top">
+                            <span class="app-icon-wrap"><img src="images/thasallicare.png"
+                                    alt="Thasalli Care app icon" class="app-icon"></span><span
+                                class="project-type"><i class="fas fa-calendar-alt"></i> Healthcare</span>
+                        </div>
+                        <h3>Thasalli Care</h3>
+                        <p>Simplifies healthcare with seamless scheduling and access to care.</p>
+                        <div class="tags"><span>Flutter</span><span>Firebase</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.gho.thasallicare" target="_blank"
+                            rel="noopener noreferrer" class="play-store-link"><i class="fab fa-google-play"></i> Get
+                            it on Google Play</a>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-top">
+                            <span class="app-icon-wrap"><img src="images/txassist.png" alt="TX Assist app icon"
+                                    class="app-icon"></span><span class="project-type"><i class="fas fa-clipboard-list"></i>
+                                Healthcare</span>
+                        </div>
+                        <h3>TX Assist</h3>
+                        <p>App for nurses, doctors, and admin to view patient appointment details.</p>
+                        <div class="tags"><span>Flutter</span><span>Firebase</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.gho.txassist" target="_blank"
+                            rel="noopener noreferrer" class="play-store-link"><i class="fab fa-google-play"></i> Get
+                            it on Google Play</a>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-top"><span class="project-icon">💃</span><span class="project-type"><i
+                                    class="fas fa-music"></i> Booking</span></div>
+                        <h3>Big Dance Centre</h3>
+                        <p>Dance academy management and class booking application.</p>
+                        <div class="tags"><span>Flutter</span></div>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-top">
+                            <span class="app-icon-wrap"><img src="images/lazypay.png" alt="LazyPay app icon"
+                                    class="app-icon"></span><span class="project-type"><i class="fas fa-coins"></i>
+                                Fintech</span>
+                        </div>
+                        <h3>LazyPay</h3>
+                        <p>Fintech credit and instant loan application.</p>
+                        <div class="tags"><span>Flutter</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.citrus.citruspay" target="_blank"
+                            rel="noopener noreferrer" class="play-store-link"><i class="fab fa-google-play"></i> Get it
+                            on Google Play</a>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-top">
+                            <span class="app-icon-wrap"><img src="images/crop-clinic.png" alt="Crop Clinic app icon"
+                                    class="app-icon"></span><span class="project-type"><i class="fas fa-seedling"></i>
+                                AgriTech</span>
+                        </div>
+                        <h3>Crop Clinic</h3>
+                        <p>Agriculture support application for farmers.</p>
+                        <div class="tags"><span>Flutter</span><span>Firebase</span></div>
+                        <a href="https://play.google.com/store/apps/details?id=com.simplifykvk.kvk" target="_blank"
+                            rel="noopener noreferrer" class="play-store-link"><i class="fab fa-google-play"></i> Get it
+                            on Google Play</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section id="services" class="section">
+            <div class="container">
+                <div class="section-head" data-reveal>
+                    <span class="section-tag">05 · Services</span>
+                    <h2 class="section-title">How I can <span class="gradient-text">help you</span></h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card" data-reveal>
+                        <div class="icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h3>Mobile App Development</h3>
+                        <p>High-performance, cross-platform apps for iOS and Android built with Flutter.</p>
+                        <a href="#contact" class="service-link">Start a project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="service-card" data-reveal>
+                        <div class="icon"><i class="fas fa-plug"></i></div>
+                        <h3>Backend Integration</h3>
+                        <p>Seamless integration of RESTful APIs, Firebase, and AWS services into your app.</p>
+                        <a href="#contact" class="service-link">Start a project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="service-card" data-reveal>
+                        <div class="icon"><i class="fas fa-video"></i></div>
+                        <h3>Real-time Features</h3>
+                        <p>Video calling (Agora), chat, and live data sync for dynamic user experiences.</p>
+                        <a href="#contact" class="service-link">Start a project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="service-card" data-reveal>
+                        <div class="icon"><i class="fas fa-rocket"></i></div>
+                        <h3>App Deployment</h3>
+                        <p>Full lifecycle management from development to publishing on Play and App Store.</p>
+                        <a href="#contact" class="service-link">Start a project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="section alt">
+            <div class="container">
+                <div class="section-head center" data-reveal>
+                    <span class="section-tag">06 · Contact</span>
+                    <h2 class="section-title">Let's build something <span class="gradient-text">awesome</span></h2>
+                    <p class="section-lead">Looking for a Flutter Developer to build reliable, scalable, and
+                        high-performance mobile apps? I'd love to hear from you.</p>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-info" data-reveal>
+                        <div class="contact-card glow-card">
+                            <div class="contact-item">
+                                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                                <div><span>Email me at</span><a href="mailto:rinshadmt20@gmail.com">rinshadmt20@gmail.com</a>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                                <div><span>Call me at</span><a href="tel:+919048572066">+91 9048572066</a></div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <div><span>Based in</span><p>Pattambi, Kerala, India</p></div>
+                            </div>
+                        </div>
+                        <div class="social-big">
+                            <a href="https://www.linkedin.com/in/md-rinshad/" target="_blank"
+                                class="social-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                            <a href="https://github.com/MohammedRinshad" target="_blank" class="social-btn github"><i
+                                    class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                    <form class="contact-form glow-card" data-reveal id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" placeholder="Tell me about your project..." rows="5"
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary submit-btn"><span>Send Message</span><i
+                                class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2026 Mohammed Rinshad MT. All rights reserved.</p>
+        <div class="container footer-inner">
+            <a href="#hero" class="logo">
+                <span class="logo-mark">M</span>
+                <span class="logo-text">rinshad.<span class="accent-dot">dev</span></span>
+            </a>
+            <p>&copy; 2026 Mohammed Rinshad MT. Crafted with <i class="fas fa-heart heart-icon"></i> and Flutter spirit.</p>
+            <a href="#hero" class="back-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
         </div>
     </footer>
 
