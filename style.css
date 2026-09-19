@@ -1775,14 +1775,16 @@ img {
    ============================================ */
 [data-reveal] {
     opacity: 0;
-    transform: translateY(34px);
-    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateY(30px) scale(0.985);
+    filter: blur(6px);
+    transition: opacity 0.8s ease, transform 0.9s cubic-bezier(0.23, 1, 0.32, 1), filter 0.8s ease;
     transition-delay: var(--rd, 0s);
 }
 
 [data-reveal].revealed {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    filter: blur(0);
 }
 
 /* Staggered reveal for grid children */
@@ -1826,19 +1828,19 @@ img {
 }
 
 @keyframes floatOrb {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(40px, 30px) scale(1.08); }
-    66% { transform: translate(-30px, 20px) scale(0.95); }
+    0%, 100% { transform: translate(var(--ox, 0px), var(--oy, 0px)) scale(1); }
+    33% { transform: translate(calc(var(--ox, 0px) + 40px), calc(var(--oy, 0px) + 30px)) scale(1.08); }
+    66% { transform: translate(calc(var(--ox, 0px) - 30px), calc(var(--oy, 0px) + 20px)) scale(0.95); }
 }
 
 @keyframes floatCard {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+    0%, 100% { transform: translate(var(--pcx, 0px), var(--pcy, 0px)); }
+    50% { transform: translate(var(--pcx, 0px), calc(var(--pcy, 0px) - 12px)); }
 }
 
 @keyframes floatChip {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    0%, 100% { transform: translate(var(--ccx, 0px), var(--ccy, 0px)); }
+    50% { transform: translate(var(--ccx, 0px), calc(var(--ccy, 0px) - 10px)); }
 }
 
 @keyframes wheel {
@@ -2401,4 +2403,449 @@ img {
 .back-to-top i {
     position: relative;
     z-index: 1;
+}
+
+/* ============================================
+   PRO MOTION PACK — cinematic layer
+   1. Custom cursor (dot + lerped ring)
+   2. Hero title masked line-reveal
+   3. Magnetic hover
+   4. Icon micro-interactions
+   5. Skill bar shimmer
+   6. Featured card animated glow bar
+   ============================================ */
+
+/* ---------- 1. Custom cursor ---------- */
+.cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    will-change: transform;
+}
+
+.cursor--dot {
+    width: 6px;
+    height: 6px;
+    background: #5b6cf5;
+    box-shadow: 0 0 12px rgba(91, 108, 245, 0.9);
+}
+
+.cursor--ring {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(91, 108, 245, 0.45);
+    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.cursor--ring.is-hover {
+    width: 58px;
+    height: 58px;
+    border-color: rgba(129, 140, 248, 0.85);
+    background: rgba(129, 140, 248, 0.12);
+}
+
+body.has-cursor,
+body.has-cursor a,
+body.has-cursor button,
+body.has-cursor input,
+body.has-cursor textarea,
+body.has-cursor select,
+body.has-cursor * {
+    cursor: none !important;
+}
+
+/* ---------- 2. Hero title masked line-reveal ---------- */
+.hero__title {
+    font-family: var(--font-head);
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    font-weight: 700;
+    line-height: 1.08;
+    margin-bottom: 1.1rem;
+    letter-spacing: -1px;
+}
+
+.hero__line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+}
+
+.hero__line-inner {
+    display: inline-block;
+    transform: translateY(115%);
+    animation: heroLineUp 0.95s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    animation-delay: var(--d, 0.9s);
+    will-change: transform;
+}
+
+/* ---------- 3. Magnetic ---------- */
+.magnetic {
+    will-change: transform;
+}
+
+/* ---------- 4. Icon micro-interactions ---------- */
+.skill-card:hover .skill-card__icon,
+.service-card:hover .service-card__icon,
+.about__value:hover .about__value-icon {
+    animation: iconWobble 0.55s ease-in-out both;
+}
+
+.about__value-icon {
+    transition: transform 0.3s ease;
+}
+
+.contact__icon:hover {
+    transform: scale(1.12) rotate(-6deg);
+    color: var(--accent-1);
+}
+
+.contact__icon {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* ---------- 5. Skill bar shimmer ---------- */
+.bar span {
+    position: relative;
+    overflow: hidden;
+}
+
+.bar span::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: translateX(-100%);
+    animation: barShimmer 2.8s ease-in-out infinite;
+}
+
+/* ---------- 6. Featured card animated glow bar ---------- */
+.project-card--featured::before {
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-1));
+    background-size: 200% auto;
+    animation: gradientShift 5s ease-in-out infinite;
+}
+
+.project-card__icon-wrap {
+    background: var(--gradient);
+    background-size: 220% auto;
+    animation: gradientShift 5s ease-in-out infinite;
+}
+
+/* ---------- Pro Motion Keyframes ---------- */
+@keyframes heroLineUp {
+    to { transform: translateY(0); }
+}
+
+@keyframes iconWobble {
+    0% { transform: rotate(0deg) scale(1); }
+    30% { transform: rotate(-9deg) scale(1.12); }
+    60% { transform: rotate(7deg) scale(1.06); }
+    100% { transform: rotate(0deg) scale(1); }
+}
+
+@keyframes barShimmer {
+    0% { transform: translateX(-100%); }
+    55%, 100% { transform: translateX(100%); }
+}
+
+/* Reduced motion keeps it classy */
+@media (prefers-reduced-motion: reduce) {
+    .hero__line-inner {
+        transform: none;
+        animation: none;
+    }
+
+    .cursor {
+        display: none;
+    }
+}
+
+/* ============================================
+   DARK MODE — toggled via html[data-theme]
+   ============================================ */
+
+/* Toggle button */
+.theme-toggle {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-right: 0.35rem;
+    overflow: hidden;
+}
+
+.theme-toggle i {
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    color: var(--accent-1);
+    border-color: rgba(129, 140, 248, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(129, 140, 248, 0.2);
+}
+
+.theme-toggle.spin i {
+    transform: rotate(360deg);
+}
+
+@media (max-width: 992px) {
+    .theme-toggle {
+        margin-right: 0;
+    }
+}
+
+/* Smooth theme crossfade on the chrome */
+html, body {
+    transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* ---------- Dark palette ---------- */
+html[data-theme='dark'] {
+    color-scheme: dark;
+    --bg: #070b18;
+    --bg-2: #0a101f;
+    --surface: #0d1427;
+    --surface-hover: #131c34;
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #e9edf8;
+    --muted: #95a3c6;
+}
+
+/* Revert the "Light Theme Adjustments" back to dark-friendly values */
+html[data-theme='dark'] .header.scrolled {
+    background: rgba(7, 11, 24, 0.78);
+    border-bottom-color: var(--border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+html[data-theme='dark'] .aurora__orb {
+    opacity: 0.5;
+}
+
+html[data-theme='dark'] .aurora__grid {
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+html[data-theme='dark'] .marquee {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+html[data-theme='dark'] .section--alt::before {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+html[data-theme='dark'] .hero__code-card {
+    background: linear-gradient(160deg, rgba(20, 28, 52, 0.9), rgba(10, 14, 30, 0.95));
+    border-color: var(--border);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 60px rgba(129, 140, 248, 0.16);
+}
+
+html[data-theme='dark'] .hero__code-head {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme='dark'] .hero__chip {
+    background: rgba(15, 22, 42, 0.88);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+html[data-theme='dark'] .hero__chip--1 i { color: #38bdf8; }
+html[data-theme='dark'] .hero__chip--2 i { color: #c084fc; }
+html[data-theme='dark'] .hero__chip--3 i { color: #818cf8; }
+
+/* Brighter syntax colours on the dark code card */
+html[data-theme='dark'] .code-keyword { color: #f472b6; }
+html[data-theme='dark'] .code-class { color: #fbbf24; }
+html[data-theme='dark'] .code-type { color: #38bdf8; }
+html[data-theme='dark'] .code-string { color: #a3e635; }
+html[data-theme='dark'] .code-function { color: #60a5fa; }
+
+html[data-theme='dark'] .bar {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme='dark'] .store-link {
+    background: rgba(12, 14, 26, 0.9);
+    color: #fff;
+    border-color: var(--border);
+    box-shadow: none;
+}
+
+html[data-theme='dark'] .store-link i {
+    color: #e8eefd;
+}
+
+html[data-theme='dark'] .store-link:hover,
+html[data-theme='dark'] .project-card.tilt-card:hover,
+html[data-theme='dark'] .glow-card:hover,
+html[data-theme='dark'] .skill-card:hover {
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.5), 0 0 30px rgba(129, 140, 248, 0.16);
+}
+
+html[data-theme='dark'] .project-card::after {
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+}
+
+html[data-theme='dark'] .header__links.open {
+    background: rgba(7, 11, 24, 0.97);
+    border-left-color: var(--border);
+}
+
+/* Gently glowing card hovers instead of black drop-shadows */
+html[data-theme='dark'] .about__value:hover,
+html[data-theme='dark'] .process__step:hover,
+html[data-theme='dark'] .timeline__content:hover,
+html[data-theme='dark'] .project-card:hover {
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.5), 0 0 34px rgba(129, 140, 248, 0.15);
+}
+
+/* Toggle control surfaces already inherit vars — nothing more needed. */
+@media (prefers-reduced-motion: reduce) {
+    .theme-toggle i {
+        transition: none;
+    }
+}
+
+/* ============================================
+   SHARED PHOTO FRAME — used by the hero photo card
+   ============================================ */
+.about__photo {
+    position: relative;
+    display: block;
+    border-radius: 22px;
+    overflow: hidden;
+    background:
+        linear-gradient(var(--surface), var(--surface)) padding-box,
+        linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3)) border-box;
+    background-size: 100% 100%, 220% auto;
+    border: 2px solid transparent;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.18), 0 0 34px rgba(129, 140, 248, 0.14);
+    cursor: pointer;
+}
+
+.about__photo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    transform: skewX(-18deg);
+    transition: left 0.7s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.about__photo-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center top;
+    aspect-ratio: 4 / 3;
+    transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.about__photo-badge,
+.about__photo-status {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.95rem;
+    border-radius: 30px;
+    background: rgba(7, 11, 24, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #fff;
+    font-family: var(--font-head);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+}
+
+.about__photo-badge {
+    bottom: 16px;
+    left: 16px;
+}
+
+.about__photo-badge i {
+    color: #38bdf8;
+}
+
+.about__photo-status {
+    top: 10px;
+    right: 10px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+}
+
+.about__photo-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #28c840;
+    box-shadow: 0 0 10px #28c840;
+    animation: blink 1.6s ease-in-out infinite;
+}
+
+/* ============================================
+   HERO PHOTO CARD — same portrait style, sits below
+   the code card so it's visible at the top. Reuses
+   the About card visuals.
+   ============================================ */
+.hero__photo-card {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 480px;
+    margin: 46px auto 0;
+    animation: floatCard 6s ease-in-out infinite;
+}
+
+.hero__photo-card .about__photo-img {
+    aspect-ratio: 4 / 3;
+}
+
+.hero__photo-card:hover .about__photo-img {
+    transform: scale(1.06);
+}
+
+.hero__photo-card .about__photo {
+    cursor: pointer;
+    transition: box-shadow 0.4s ease;
+}
+
+.hero__photo-card:hover .about__photo {
+    animation: gradientShift 4s ease-in-out infinite;
+    box-shadow: 0 22px 54px rgba(0, 0, 0, 0.24), 0 0 44px rgba(129, 140, 248, 0.2);
+}
+
+.hero__photo-card:hover .about__photo::after {
+    left: 135%;
+}
+
+@media (max-width: 992px) {
+    .hero__photo-card {
+        margin-top: 34px;
+    }
 }

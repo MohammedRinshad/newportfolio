@@ -13,6 +13,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('portfolio-theme');
+                var dark = t === 'dark';
+                document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+                document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
 </head>
 
 <body>
@@ -42,6 +54,10 @@
         </svg>
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <!-- Custom Cursor (desktop only, injected by JS on fine pointers) -->
+    <div class="cursor cursor--dot" aria-hidden="true"></div>
+    <div class="cursor cursor--ring" aria-hidden="true"></div>
 
     <script src="script.js"></script>
 </body>

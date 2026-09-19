@@ -46,12 +46,15 @@
 
   /**
    * Preloader
-   * Hides the loading screen after a short delay.
+   * Hides the loading screen after a short delay, then kicks off the
+   * choreographed hero entrance (title line-reveal + staggered fade).
    */
   const Preloader = {
     init() {
       setTimeout(() => {
         $('.preloader').classList.add('hidden');
+        document.body.classList.add('loaded');
+        HeroEntrance.run();
       }, CONFIG.preloaderDelay);
     },
   };
@@ -213,7 +216,10 @@
 
   /**
    * Reveal-on-Scroll
-   * IntersectionObserver that fades elements in.
+   * IntersectionObserver that fades elements in with a premium blur-up.
+   * Hero elements are excluded — they are choreographed by HeroEntrance.
+   * Once fully revealed, the data-reveal attribute is stripped so hover
+   * transforms (lift, tilt) are free to animate afterwards.
    */
   const RevealOnScroll = {
     init() {
@@ -221,18 +227,23 @@
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('revealed');
-              if (entry.target.classList.contains('hero__stat-num')) {
-                Counter.animate(entry.target);
+              const el = entry.target;
+              el.classList.add('revealed');
+              if (el.classList.contains('hero__stat-num')) {
+                Counter.animate(el);
               }
-              observer.unobserve(entry.target);
+              observer.unobserve(el);
+              setTimeout(() => el.removeAttribute('data-reveal'), 1600);
             }
           });
         },
         { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
       );
 
-      $$('[data-reveal]').forEach((el) => observer.observe(el));
+      $$('[data-reveal]').forEach((el) => {
+        if (el.closest('#hero')) return;
+        observer.observe(el);
+      });
     },
   };
 
@@ -249,8 +260,8 @@
               const card = entry.target;
               card.classList.add('in-view');
               card.querySelectorAll('.bar span').forEach((bar) => {
-                const width = bar.getAttribute('style').match(/width:(\d+)%/)[1];
-                bar.style.width = `${width}%`;
+                const width = (bar.getAttribute('style') || '').match(/width:(\d+)%/);
+                if (width) bar.style.width = `${width[1]}%`;
               });
               observer.unobserve(card);
             }
@@ -261,10 +272,12 @@
 
       $$('.skill-card').forEach((card) => {
         card.querySelectorAll('.bar').forEach((bar) => {
+          const fill = bar.querySelector('span');
+          const width = (fill && (fill.getAttribute('style') || '').match(/width:(\d+)%/));
+          if (!width) return;
           const percent = document.createElement('span');
           percent.className = 'skill-card__percent';
-          const width = bar.getAttribute('style').match(/width:(\d+)%/)[1];
-          percent.textContent = `${width}%`;
+          percent.textContent = `${width[1]}%`;
           bar.closest('li').appendChild(percent);
         });
         observer.observe(card);
@@ -456,6 +469,224 @@
     },
   };
 
+  /**
+   * Custom Cursor
+   * Desktop-only dot + trailing ring. The ring lerps toward the pointer and
+   * balloons over interactive elements for a tactile, premium feel.
+   */
+  const CustomCursor = {
+    init() {
+      if (!window.matchMedia('(pointer: fine)').matches) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const dot = $('.cursor--dot');
+      const ring = $('.cursor--ring');
+      if (!dot || !ring) return;
+
+      document.body.classList.add('has-cursor');
+
+      let mx = window.innerWidth / 2;
+      let my = window.innerHeight / 2;
+      let rx = mx;
+      let ry = my;
+      let raf = null;
+
+      const loop = () => {
+        rx += (mx - rx) * 0.16;
+        ry += (my - ry) * 0.16;
+        ring.style.transform = `translate(${rx.toFixed(2)}px, ${ry.toFixed(2)}px) translate(-50%, -50%)`;
+        raf = null;
+      };
+
+      document.addEventListener('mousemove', (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+        dot.style.transform = `translate(${mx.toFixed(2)}px, ${my.toFixed(2)}px) translate(-50%, -50%)`;
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+        if (!raf) raf = requestAnimationFrame(loop);
+      }, { passive: true });
+
+      const interactive = 'a, button, input, textarea, select, .tilt-card, .skill-card, .service-card, .process__step, .timeline__content, .glow-card';
+      document.addEventListener('mouseover', (e) => {
+        if (e.target.closest(interactive)) ring.classList.add('is-hover');
+        else ring.classList.remove('is-hover');
+      }, { passive: true });
+
+      document.documentElement.addEventListener('mouseleave', () => {
+        dot.style.opacity = '0';
+        ring.style.opacity = '0';
+      });
+      document.documentElement.addEventListener('mouseenter', () => {
+        dot.style.opacity = '1';
+      });
+    },
+  };
+
+  /**
+   * Magnetic Hover
+   * Buttons and social icons gently gravitate toward the cursor.
+   */
+  const Magnetic = {
+    init() {
+      if (!window.matchMedia('(pointer: fine)').matches) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      $$('.btn, .hero__social a, .store-link, .header__logo, .contact__social-btn').forEach((el) => {
+        el.classList.add('magnetic');
+
+        el.addEventListener('mousemove', (e) => {
+          const rect = el.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          el.style.transition = 'transform 0.12s ease-out';
+          el.style.transform = `translate(${(x * 0.3).toFixed(2)}px, ${(y * 0.3).toFixed(2)}px)`;
+        });
+
+        el.addEventListener('mouseleave', () => {
+          el.style.transition = 'transform 0.45s cubic-bezier(0.23, 1, 0.32, 1)';
+          el.style.transform = '';
+          setTimeout(() => { el.style.transition = ''; }, 460);
+        });
+      });
+    },
+  };
+
+  /**
+   * Hero Parallax
+   * The code card and floating chips drift in depth while the mouse moves,
+   * layered on top of their gentle float via CSS variables.
+   */
+  const HeroParallax = {
+    init() {
+      if (!window.matchMedia('(pointer: fine)').matches) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const card = $('.hero__code-card');
+      const chips = $$('.hero__chip');
+      if (!card && chips.length === 0) return;
+
+      let raf = null;
+
+      const onMove = (e) => {
+        if (!document.body.classList.contains('loaded')) return;
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          const cx = (e.clientX / window.innerWidth - 0.5) * 2;
+          const cy = (e.clientY / window.innerHeight - 0.5) * 2;
+          if (card) {
+            card.style.setProperty('--pcx', `${(cx * 14).toFixed(2)}px`);
+            card.style.setProperty('--pcy', `${(cy * 10).toFixed(2)}px`);
+          }
+          chips.forEach((chip, i) => {
+            const depth = 12 + i * 5;
+            chip.style.setProperty('--ccx', `${(cx * depth).toFixed(2)}px`);
+            chip.style.setProperty('--ccy', `${(cy * depth).toFixed(2)}px`);
+          });
+          raf = null;
+        });
+      };
+
+      document.addEventListener('mousemove', onMove, { passive: true });
+    },
+  };
+
+  /**
+   * Aurora Parallax
+   * Background orbs drift vertically as the page scrolls for added depth,
+   * fused into their float animation via the --oy CSS variable.
+   */
+  const AuroraParallax = {
+    init() {
+      const orbs = $$('.aurora__orb');
+      if (orbs.length === 0) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      let ticking = false;
+
+      const update = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const y = window.scrollY;
+          orbs.forEach((orb, i) => {
+            const speed = parseFloat(orb.dataset.speed || `${0.04 + i * 0.02}`);
+            orb.style.setProperty('--oy', `${(y * speed).toFixed(2)}px`);
+          });
+          ticking = false;
+        });
+      };
+
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    },
+  };
+
+  /**
+   * Hero Entrance
+   * Runs once the preloader fades: reveals the name line-by-line, then
+   * staggers the fade-up of greeting / description / CTAs / stats.
+   */
+  const HeroEntrance = {
+    run() {
+      $$('.hero__title .hero__line-inner').forEach((el, i) => {
+        el.style.setProperty('--d', `${(0.72 + i * 0.15).toFixed(2)}s`);
+      });
+
+      $$('.hero [data-reveal]').forEach((el, i) => {
+        el.style.setProperty('--rd', `${(0.45 + i * 0.1).toFixed(2)}s`);
+        el.classList.add('revealed');
+      });
+
+      $$('.hero__stat-num[data-count]').forEach((el) => {
+        setTimeout(() => Counter.animate(el), 1500);
+      });
+    },
+  };
+
+  /**
+   * Theme Toggle
+   * Light by default; the theme only changes when the user clicks the
+   * toggle. The choice is persisted, and the initial theme is applied
+   * early by an inline script in <head> to avoid any flash.
+   */
+  const ThemeToggle = {
+    key: 'portfolio-theme',
+
+    init() {
+      this.btn = $('#themeToggle');
+      if (!this.btn) return;
+
+      this.setupIcon();
+
+      this.btn.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        this.apply(next);
+        try { localStorage.setItem(this.key, next); } catch (e) { /* ignore */ }
+      });
+    },
+
+    apply(theme) {
+      document.documentElement.dataset.theme = theme;
+      document.documentElement.style.colorScheme = theme;
+      if (!this.btn) return;
+      const icon = this.btn.querySelector('i');
+      if (icon) {
+        const goingDark = theme === 'dark';
+        icon.className = goingDark ? 'fas fa-sun' : 'fas fa-moon';
+        this.btn.classList.remove('spin');
+        void this.btn.offsetWidth; // restart the CSS transition
+        this.btn.classList.add('spin');
+      }
+    },
+
+    setupIcon() {
+      const dark = document.documentElement.dataset.theme === 'dark';
+      const icon = this.btn.querySelector('i');
+      if (icon) icon.className = dark ? 'fas fa-sun' : 'fas fa-moon';
+    },
+  };
+
   // ============================================
   // Bootstrap
   // ============================================
@@ -465,7 +696,6 @@
     ScrollEffects.init();
     TypeWriter.init();
     StatusRotator.init();
-    Counter.init();
     RevealOnScroll.init();
     SkillBars.init();
     TimelineProgress.init();
@@ -474,6 +704,11 @@
     ScrollProgress.init();
     Tilt3D.init();
     BackToTop.init();
+    CustomCursor.init();
+    Magnetic.init();
+    HeroParallax.init();
+    AuroraParallax.init();
+    ThemeToggle.init();
   };
 
   document.addEventListener('DOMContentLoaded', init);
