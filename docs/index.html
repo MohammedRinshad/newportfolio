@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammed Rinshad MT | Flutter Developer</title>
+    <meta name="description"
+        content="Portfolio of Mohammed Rinshad MT, a Flutter Developer specializing in scalable mobile applications for Android and iOS.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('portfolio-theme');
+                var dark = t === 'dark';
+                document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+                document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+</head>
+
+<body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+        <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader__inner">
+            <div class="preloader__orb"></div>
+            <span>Loading<span class="preloader__dots"></span></span>
+        </div>
+    </div>
+
+        <!-- Background Aurora -->
+    <div class="aurora" aria-hidden="true">
+        <div class="aurora__orb aurora__orb--1"></div>
+        <div class="aurora__orb aurora__orb--2"></div>
+        <div class="aurora__orb aurora__orb--3"></div>
+        <div class="aurora__grid"></div>
+    </div>
+
+        <!-- Header -->
+    <header id="navbar" class="header">
+        <nav class="header__nav container">
+            <a href="#hero" class="header__logo">
+                <span class="header__logo-mark">M</span>
+                <span class="header__logo-text">rinshad.<span class="header__logo-accent">dev</span></span>
+            </a>
+            <ul class="header__links" id="navLinks">
+                <li><a href="#about" class="header__link">About</a></li>
+                <li><a href="#skills" class="header__link">Skills</a></li>
+                <li><a href="#experience" class="header__link">Experience</a></li>
+                <li><a href="#projects" class="header__link">Projects</a></li>
+                <li><a href="#services" class="header__link">Services</a></li>
+                <li><a href="#process" class="header__link">Process</a></li>
+                <li><a href="#contact" class="btn btn--primary header__cta">Let's Talk</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle light / dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="header__hamburger" id="hamburger" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+
+    <main>
+                <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="container hero__content">
+                <div class="hero__text">
+                    <span class="hero__greeting" data-reveal>
+                        <span class="hero__greeting-line"></span> Hello, I'm
+                    </span>
+                    <h1 class="hero__title">
+                        <span class="hero__line"><span class="hero__line-inner">Mohammed</span></span>
+                        <span class="hero__line"><span class="hero__line-inner">Rinshad <span class="gradient-text">MT</span></span></span>
+                    </h1>
+                    <h2 class="hero__typed" data-reveal>
+                        <span class="hero__typed-caret"></span><span id="typed"></span>
+                    </h2>
+                    <p class="hero__desc" data-reveal>
+                        I craft scalable, secure, and production-ready mobile applications for Android &amp; iOS using
+                        Flutter — clean code, delightful experiences.
+                    </p>
+                    <div class="hero__buttons" data-reveal>
+                        <a href="#projects" class="btn btn--primary"><i class="fas fa-code"></i> View My Work</a>
+                        <a href="#contact" class="btn btn--ghost"><i class="fas fa-paper-plane"></i> Let's Talk</a>
+                        <a href="#" id="resumeBtn" class="btn btn--ghost"><i class="fas fa-download"></i> Resume</a>
+                    </div>
+                    <div class="hero__social" data-reveal>
+                        <a href="https://www.linkedin.com/in/md-rinshad/" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/MohammedRinshad" target="_blank" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:rinshadmt20@gmail.com" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                    <div class="hero__stats" data-reveal>
+                        <div class="hero__stat">
+                            <span class="hero__stat-num" data-count="3">0</span><span class="hero__stat-plus">+</span>
+                            <span class="hero__stat-label">Years Experience</span>
+                        </div>
+                        <div class="hero__stat">
+                            <span class="hero__stat-num" data-count="13">0</span><span class="hero__stat-plus">+</span>
+                            <span class="hero__stat-label">Apps Shipped</span>
+                        </div>
+                        <div class="hero__stat">
+                            <span class="hero__stat-num hero__stat-num--plain">2</span>
+                            <span class="hero__stat-label">Platforms</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero__visual" data-reveal>
+                    <div class="hero__particles" aria-hidden="true">
+                        <span class="hero__particle hero__particle--1"></span>
+                        <span class="hero__particle hero__particle--2"></span>
+                        <span class="hero__particle hero__particle--3"></span>
+                        <span class="hero__particle hero__particle--4"></span>
+                        <span class="hero__particle hero__particle--5"></span>
+                    </div>
+                    <div class="hero__code-card">
+                        <div class="hero__code-head">
+                            <span class="dot dot--red"></span>
+                            <span class="dot dot--yellow"></span>
+                            <span class="dot dot--green"></span>
+                            <span class="hero__code-title">mohammed_rinshad.dart</span>
+                        </div>
+                        <pre>
+<span class="code-keyword">import</span> <span class="code-string">'package:flutter/material.dart'</span>;
+
+<span class="code-keyword">class</span> <span class="code-class">Developer</span> {
+  <span class="code-keyword">final</span> <span class="code-type">String</span> name = <span class="code-string">"Mohammed Rinshad MT"</span>;
+  <span class="code-keyword">final</span> <span class="code-type">String</span> role = <span class="code-string">"Flutter Developer"</span>;
+  <span class="code-keyword">final</span> <span class="code-type">String</span> basedIn = <span class="code-string">"Kerala, India"</span>;
+
+  <span class="code-type">Widget</span> <span class="code-function">buildProfile</span>() {
+    <span class="code-keyword">return</span> <span class="code-type">Column</span>(
+      children: [
+        <span class="code-type">Text</span>(name),
+        <span class="code-type">Text</span>(<span class="code-string">"🚀 Building scalable apps…"</span>),
+      ],
+    );
+  }
+}</pre>
+                        <div class="hero__code-status">
+                            <span class="hero__status-dot"></span>
+                            <span class="hero__status-text" id="statusText"></span>
+                        </div>
+                    </div>
+                    <div class="hero__chip hero__chip--1"><i class="fab fa-flutter"></i> Flutter</div>
+                    <div class="hero__photo-card">
+                        <div class="about__photo">
+                            <img src="images/about-photo.jpg" alt="Mohammed Rinshad MT" class="about__photo-img" loading="lazy">
+                            <span class="about__photo-badge"><i class="fas fa-map-pin"></i> Kerala, India</span>
+                            <span class="about__photo-status"><span class="about__photo-dot"></span> Available for work</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#about" class="hero__scroll" aria-label="Scroll down">
+                <span class="hero__mouse">
+                    <span class="hero__wheel"></span>
+                </span>
+            </a>
+        </section>
+
+                <!-- Marquee -->
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee__track">
+                <span>Flutter</span><i class="fab fa-flutter"></i>
+                <span>Dart</span><i class="fas fa-code"></i>
+                <span>Riverpod</span><i class="fas fa-layer-group"></i>
+                <span>Provider</span><i class="fas fa-boxes"></i>
+                <span>Bloc</span><i class="fas fa-project-diagram"></i>
+                <span>GetX</span><i class="fas fa-bolt"></i>
+                <span>Firebase</span><i class="fas fa-fire"></i>
+                <span>Agora</span><i class="fas fa-video"></i>
+                <span>Razorpay</span><i class="fas fa-credit-card"></i>
+                <span>Stripe</span><i class="fab fa-stripe"></i>
+                <span>CI / CD</span><i class="fas fa-infinity"></i>
+                <span>Firebase Cloud Messaging</span><i class="fas fa-bell"></i>
+                <span>MVC</span><i class="fas fa-diagram-project"></i>
+                <span>MVVM</span><i class="fas fa-sitemap"></i>
+                <span>Google Maps</span><i class="fas fa-map-marker-alt"></i>
+                <span>SQL</span><i class="fas fa-database"></i>
+                <span>Database Management</span><i class="fas fa-server"></i>
+                <span>Microsoft SQL Server</span><i class="fas fa-database"></i>
+                <span>SSMS</span><i class="fas fa-toolbox"></i>
+                <span>Stored Procedures</span><i class="fas fa-cogs"></i>
+                <span>Flutter</span><i class="fab fa-flutter"></i>
+                <span>Dart</span><i class="fas fa-code"></i>
+                <span>Riverpod</span><i class="fas fa-layer-group"></i>
+                <span>Provider</span><i class="fas fa-boxes"></i>
+                <span>Bloc</span><i class="fas fa-project-diagram"></i>
+                <span>GetX</span><i class="fas fa-bolt"></i>
+                <span>Firebase</span><i class="fas fa-fire"></i>
+                <span>Agora</span><i class="fas fa-video"></i>
+                <span>Razorpay</span><i class="fas fa-credit-card"></i>
+                <span>Stripe</span><i class="fab fa-stripe"></i>
+                <span>CI / CD</span><i class="fas fa-infinity"></i>
+                <span>Firebase Cloud Messaging</span><i class="fas fa-bell"></i>
+                <span>MVC</span><i class="fas fa-diagram-project"></i>
+                <span>MVVM</span><i class="fas fa-sitemap"></i>
+                <span>Google Maps</span><i class="fas fa-map-marker-alt"></i>
+                <span>SQL</span><i class="fas fa-database"></i>
+                <span>Database Management</span><i class="fas fa-server"></i>
+                <span>Microsoft SQL Server</span><i class="fas fa-database"></i>
+                <span>SSMS</span><i class="fas fa-toolbox"></i>
+                <span>Stored Procedures</span><i class="fas fa-cogs"></i>
+            </div>
+        </div>
+
+                <!-- About -->
+        <section id="about" class="section">
+            <div class="container">
+                <div class="section__head" data-reveal>
+                    <span class="section__tag">01 · About</span>
+                    <h2 class="section__title">Passionate about building <span class="gradient-text">great apps</span></h2>
+                </div>
+                <div class="about__grid">
+                    <div class="about__text" data-reveal>
+                        <p>I'm a <strong>Flutter Developer with 3+ years of professional experience</strong> building,
+                            maintaining, and deploying high-quality cross-platform mobile applications for Android and
+                            iOS. I enjoy turning ideas and business requirements into reliable, intuitive, and scalable
+                            mobile experiences.</p>
+                        <p>My core expertise includes <strong>Flutter, Dart, GetX, REST APIs, Dio, state management,
+                                responsive UI development, JSON, Firebase, Git, and mobile application
+                                architecture</strong>. I have hands-on experience integrating complex features such as
+                            real-time video calling, payment gateways, push notifications, authentication, cloud
+                            services, third-party APIs, and backend systems.</p>
+                        <p>I have worked on applications across <strong>Healthcare, FinTech, Agriculture, and
+                                Education</strong>, and I'm comfortable working across the complete mobile application
+                            lifecycle — from requirements and design to development, API integration, testing,
+                            debugging, deployment, and post-release support on the <strong>Google Play Store and Apple
+                                App Store</strong>.</p>
+                        <p>I believe good mobile development is more than writing code. It is about creating
+                            applications that are simple to use, technically reliable, scalable, secure, and
+                            meaningful to the people who use them.</p>
+                        <div class="about__facts">
+                            <div class="about__fact"><i class="fas fa-map-marker-alt"></i> Pattambi, Kerala, India</div>
+                            <div class="about__fact"><i class="fas fa-graduation-cap"></i> MCA — University of Calicut</div>
+                            <div class="about__fact"><i class="fas fa-tasks"></i> Agile / Scrum</div>
+                            <div class="about__fact"><i class="fas fa-globe"></i> English · Malayalam</div>
+                        </div>
+                    </div>
+                    <div class="about__cards" data-reveal>
+                        <div class="about__card glow-card">
+                            <div class="about__card-head"><i class="fas fa-graduation-cap"></i> Education</div>
+                            <div class="about__edu-item">
+                                <h4>Master of Computer Applications</h4>
+                                <p>University of Calicut — 2018–2021</p>
+                                <span class="badge">CGPA 7.3</span>
+                            </div>
+                            <div class="about__edu-item">
+                                <h4>Bachelor of Computer Applications</h4>
+                                <p>University of Calicut — 2015–2018</p>
+                                <span class="badge">CGPA 6.3</span>
+                            </div>
+                        </div>
+                        <div class="about__card glow-card">
+                            <div class="about__card-head"><i class="fas fa-bullseye"></i> What I do</div>
+                            <div class="about__focus"><span>⌨️</span> Write clean, testable Flutter code</div>
+                            <div class="about__focus"><span>🔐</span> Ship secure, data-safe apps</div>
+                            <div class="about__focus"><span>🚀</span> Deploy to Play &amp; App Store</div>
+                            <div class="about__focus"><span>📈</span> Optimize performance &amp; UX</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about__values">
+                    <div class="about__value" data-reveal>
+                        <div class="about__value-icon"><i class="fas fa-bolt"></i></div>
+                        <h4>Performance First</h4>
+                        <p>Smooth, fast, production-ready apps optimized across devices and screen sizes.</p>
+                    </div>
+                    <div class="about__value" data-reveal>
+                        <div class="about__value-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h4>Security Focused</h4>
+                        <p>Secure data handling, safe authentication, and protected payment flows by default.</p>
+                    </div>
+                    <div class="about__value" data-reveal>
+                        <div class="about__value-icon"><i class="fas fa-layer-group"></i></div>
+                        <h4>Scalable by Design</h4>
+                        <p>Clean architecture and state management that grow with your product and team.</p>
+                    </div>
+                    <div class="about__value" data-reveal>
+                        <div class="about__value-icon"><i class="fas fa-life-ring"></i></div>
+                        <h4>End-to-End Ownership</h4>
+                        <p>From idea to store — build, test, deploy, and support the full app lifecycle.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="section section--alt">
+            <div class="container">
+                <div class="section__head" data-reveal>
+                    <span class="section__tag">02 · Skills</span>
+                    <h2 class="section__title">My <span class="gradient-text">technical toolbox</span></h2>
+                </div>
+                <div class="skills__grid">
+                    <div class="skill-card" data-reveal>
+                        <div class="skill-card__icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h3>Mobile Development</h3>
+                        <ul>
+                            <li><span>Flutter</span><div class="bar"><span style="width:95%"></span></div></li>
+                            <li><span>Dart</span><div class="bar"><span style="width:92%"></span></div></li>
+                            <li><span>Android Studio</span><div class="bar"><span style="width:90%"></span></div></li>
+                            <li><span>Xcode</span><div class="bar"><span style="width:82%"></span></div></li>
+                        </ul>
+                    </div>
+                    <div class="skill-card" data-reveal>
+                        <div class="skill-card__icon"><i class="fas fa-layer-group"></i></div>
+                        <h3>State Management</h3>
+                        <ul>
+                            <li><span>Riverpod</span><div class="bar"><span style="width:90%"></span></div></li>
+                            <li><span>Provider</span><div class="bar"><span style="width:92%"></span></div></li>
+                            <li><span>Bloc / BLoC</span><div class="bar"><span style="width:85%"></span></div></li>
+                            <li><span>GetX</span><div class="bar"><span style="width:88%"></span></div></li>
+                        </ul>
+                    </div>
+                    <div class="skill-card" data-reveal>
+                        <div class="skill-card__icon"><i class="fas fa-server"></i></div>
+                        <h3>Backend &amp; Cloud</h3>
+                        <ul>
+                            <li><span>Firebase Auth &amp; FCM</span><div class="bar"><span style="width:93%"></span></div></li>
+                            <li><span>Firestore &amp; Realtime DB</span><div class="bar"><span style="width:90%"></span></div></li>
+                            <li><span>RESTful APIs</span><div class="bar"><span style="width:94%"></span></div></li>
+                            <li><span>AWS SNS</span><div class="bar"><span style="width:80%"></span></div></li>
+                        </ul>
+                    </div>
+                    <div class="skill-card" data-reveal>
+                        <div class="skill-card__icon"><i class="fas fa-credit-card"></i></div>
+                        <h3>Monetization &amp; Comms</h3>
+                        <ul>
+                            <li><span>Razorpay</span><div class="bar"><span style="width:88%"></span></div></li>
+                            <li><span>Stripe</span><div class="bar"><span style="width:85%"></span></div></li>
+                            <li><span>Agora Video</span><div class="bar"><span style="width:86%"></span></div></li>
+                        </ul>
+                    </div>
+                    <div class="skill-card" data-reveal>
+                        <div class="skill-card__icon"><i class="fas fa-tools"></i></div>
+                        <h3>Tools &amp; Workflow</h3>
+                        <ul>
+                            <li><span>GitHub &amp; GitLab</span><div class="bar"><span style="width:92%"></span></div></li>
+                            <li><span>CI/CD Pipelines</span><div class="bar"><span style="width:84%"></span></div></li>
+                            <li><span>Agile / Scrum</span><div class="bar"><span style="width:90%"></span></div></li>
+                        </ul>
+                    </div>
+                    <div class="skill-card" data-reveal>
+                        <div class="skill-card__icon"><i class="fas fa-sitemap"></i></div>
+                        <h3>Architecture</h3>
+                        <ul>
+                            <li><span>MVVM</span><div class="bar"><span style="width:93%"></span></div></li>
+                            <li><span>Scalable Architecture</span><div class="bar"><span style="width:88%"></span></div></li>
+                            <li><span>Secure Data Handling</span><div class="bar"><span style="width:90%"></span></div></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+                <!-- Experience -->
+        <section id="experience" class="section">
+            <div class="container">
+                <div class="section__head" data-reveal>
+                    <span class="section__tag">03 · Experience</span>
+                    <h2 class="section__title">Where I've <span class="gradient-text">worked</span></h2>
+                </div>
+                <div class="timeline">
+                    <div class="timeline__item" data-reveal>
+                        <div class="timeline__dot"><i class="fas fa-briefcase"></i></div>
+                        <div class="timeline__content">
+                            <div class="timeline__head">
+                                <div>
+                                    <h3>Flutter Developer</h3>
+                                    <h4><a href="https://www.globalhealthopinion.com/" target="_blank"
+                                            rel="noopener noreferrer">GHO Technologies Private Limited</a> — Kochi,
+                                        Kerala</h4>
+                                </div>
+                                <span class="timeline__date">Aug 2024 – Present</span>
+                            </div>
+                            <ul>
+                                <li>Developing and maintaining cross-platform Flutter applications for Android and
+                                    iOS.</li>
+                                <li>Implemented push notification systems using Firebase Cloud Messaging and AWS SNS.</li>
+                                <li>Integrated secure payment gateways including Razorpay and Stripe.</li>
+                                <li>Built video consultation features using Agora for telemedicine applications.</li>
+                                <li>Applied Riverpod, GetX, and Provider for scalable state management.</li>
+                                <li>Implemented enhanced data security mechanisms to protect sensitive user data.</li>
+                                <li>Integrated RESTful APIs using Dio and managed efficient, cache-first data flows.</li>
+                                <li>Collaborated with backend and design teams in an Agile environment to ship features
+                                    on time.</li>
+                                <li>Monitored production apps, resolved bugs, and reduced crash rates in release builds.</li>
+                                <li>Managed Play Store and App Store releases, including review handling and version
+                                    rollout.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline__item" data-reveal>
+                        <div class="timeline__dot"><i class="fas fa-briefcase"></i></div>
+                        <div class="timeline__content">
+                            <div class="timeline__head">
+                                <div>
+                                    <h3>Flutter Developer</h3>
+                                    <h4><a href="https://simplifyagri.com/" target="_blank"
+                                            rel="noopener noreferrer">Simplify Agri Private Limited</a> — Palakkad,
+                                        Kerala</h4>
+                                </div>
+                                <span class="timeline__date">Jun 2022 – Jun 2024</span>
+                            </div>
+                            <ul>
+                                <li>Built and deployed Flutter apps focused on agriculture and service platforms.</li>
+                                <li>Integrated backend systems and REST APIs.</li>
+                                <li>Used Provider and Bloc for clean, scalable architecture.</li>
+                                <li>Managed Google Play Store and Apple App Store releases.</li>
+                                <li>Set up CI/CD pipelines for automated builds and deployments.</li>
+                                <li>Worked closely with designers for accurate UI/UX implementation.</li>
+                                <li>Optimized app performance, startup time, and memory usage across device tiers.</li>
+                                <li>Conducted code reviews and improved code quality and maintainability.</li>
+                                <li>Wrote technical documentation and maintained clean project structure.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline__item" data-reveal>
+                        <div class="timeline__dot"><i class="fas fa-briefcase"></i></div>
+                        <div class="timeline__content">
+                            <div class="timeline__head">
+                                <div>
+                                    <h3>Junior Flutter Developer</h3>
+                                    <h4><a href="https://www.linkedin.com/company/binatestation/" target="_blank"
+                                            rel="noopener noreferrer">Binate Station Private Limited</a> — Kochi,
+                                        Kerala</h4>
+                                </div>
+                                <span class="timeline__date">Feb 2022 – Jun 2022</span>
+                            </div>
+                            <ul>
+                                <li>Optimized app performance across multiple devices and screen sizes.</li>
+                                <li>Debugged and resolved production issues efficiently.</li>
+                                <li>Worked in an Agile Scrum environment, participating in sprints and retrospectives.
+                                </li>
+                                <li>Followed MVVM architecture and Flutter best practices.</li>
+                                <li>Collaborated with designers to implement pixel-perfect, responsive UI.</li>
+                                <li>Used Git version control with feature branches and pull requests.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline__item" data-reveal>
+                        <div class="timeline__dot"><i class="fas fa-laptop-code"></i></div>
+                        <div class="timeline__content">
+                            <div class="timeline__head">
+                                <div>
+                                    <h3>Junior Flutter Developer <span class="intern-badge">Intern</span></h3>
+                                    <h4><a href="https://www.ralfiz.com/" target="_blank"
+                                            rel="noopener noreferrer">Ralfiz Technologies Pvt Ltd</a> — Malappuram,
+                                        Kerala</h4>
+                                </div>
+                                <span class="timeline__date">Aug 2021 – Jan 2022</span>
+                            </div>
+                            <ul>
+                                <li>Explored and implemented Flutter widgets for Android and iOS.</li>
+                                <li>Integrated Firebase services: authentication, cloud storage, and databases.</li>
+                                <li>Worked with third-party libraries and APIs to extend app functionality.</li>
+                                <li>Organized code following Flutter project structure and best practices.</li>
+                                <li>Practiced version control with Git for team collaboration.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+                <!-- Projects -->
+        <section id="projects" class="section section--alt">
+            <div class="container">
+                <div class="section__head" data-reveal>
+                    <span class="section__tag">04 · Projects</span>
+                    <h2 class="section__title">Featured <span class="gradient-text">work</span></h2>
+                </div>
+                <div class="projects__grid">
+                    <div class="project-card project-card--featured" data-reveal>
+                        <div class="project-card__top">
+                            <span class="project-card__icon-wrap"><img src="images/mallu-cafe-radio.png"
+                                    alt="Mallu Cafe Radio USA app icon" class="project-card__icon"></span>
+                            <span class="project-card__type"><i class="fas fa-radio"></i> Audio Streaming</span>
+                        </div>
+                        <h3>Mallu Cafe Radio <span class="intern-badge">USA</span></h3>
+                        <p>Audio streaming application to stream radio, music, and shows in multiple languages for
+                            Malayalis worldwide.</p>
+                        <div class="project-card__store-links">
+                            <a href="https://play.google.com/store/apps/details?id=com.gho.mallucafe" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--google">
+                                <i class="fab fa-google-play"></i> Get it on Google Play
+                            </a>
+                            <a href="https://apps.apple.com/us/app/mallu-cafe-radio-usa/id6760994411" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--apple">
+                                <i class="fab fa-apple"></i> Download on the App Store
+                            </a>
+                        </div>
+                        <div class="project-card__tags">
+                            <span>Flutter</span><span>Audio Streaming</span><span>Firebase</span>
+                        </div>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-card__top">
+                            <span class="project-card__icon-wrap"><img src="images/aabindassist.png"
+                                    alt="Aabind Connect app icon" class="project-card__icon"></span>
+                            <span class="project-card__type"><i class="fas fa-hospital-user"></i> Healthcare</span>
+                        </div>
+                        <h3>Aabind Connect</h3>
+                        <p>Used to manage hospital management efficiently.</p>
+                        <div class="project-card__store-links">
+                            <a href="https://play.google.com/store/apps/details?id=com.gho.aabindassist" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--google">
+                                <i class="fab fa-google-play"></i> Get it on Google Play
+                            </a>
+                            <a href="https://apps.apple.com/us/app/aabind-connect/id6795075115" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--apple">
+                                <i class="fab fa-apple"></i> Download on the App Store
+                            </a>
+                        </div>
+                        <div class="project-card__tags"><span>Flutter</span><span>Firebase</span><span>GetX</span></div>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-card__top">
+                            <span class="project-card__icon-wrap"><img src="images/aabindhospital.png"
+                                    alt="Aabind Hospital app icon" class="project-card__icon"></span>
+                            <span class="project-card__type"><i class="fas fa-hospital"></i> Healthcare</span>
+                        </div>
+                        <h3>Aabind Hospital</h3>
+                        <p>The official portal for Aabind Hospital.</p>
+                        <div class="project-card__store-links">
+                            <a href="https://play.google.com/store/apps/details?id=com.hostune.aabindhospital" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--google">
+                                <i class="fab fa-google-play"></i> Get it on Google Play
+                            </a>
+                            <a href="https://apps.apple.com/us/app/aarogyam-by-aabind/id6780435426" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--apple">
+                                <i class="fab fa-apple"></i> Download on the App Store
+                            </a>
+                        </div>
+                        <div class="project-card__tags"><span>Flutter</span><span>Firebase</span></div>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-card__top">
+                            <span class="project-card__icon-wrap"><img src="images/prx-care.png" alt="PRx.Care app icon"
+                                    class="project-card__icon"></span>
+                            <span class="project-card__type"><i class="fas fa-heartbeat"></i> Healthcare</span>
+                        </div>
+                        <h3>PRx.Care</h3>
+                        <p>Healthcare scheduling and patient journey management application.</p>
+                        <div class="project-card__store-links">
+                            <a href="https://play.google.com/store/apps/details?id=prx.care.patient_journey" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--google">
+                                <i class="fab fa-google-play"></i> Get it on Google Play
+                            </a>
+                            <a href="https://apps.apple.com/us/app/prx-care/id6739527531" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--apple">
+                                <i class="fab fa-apple"></i> Download on the App Store
+                            </a>
+                        </div>
+                        <div class="project-card__tags">
+                            <span>Flutter</span><span>Firebase</span><span>Riverpod</span><span>GetX</span><span>AWS
+                                SNS</span>
+                        </div>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-card__top">
+                            <span class="project-card__icon-wrap"><img src="images/prx-assist.png" alt="PRx Assist app icon"
+                                    class="project-card__icon"></span>
+                            <span class="project-card__type"><i class="fas fa-user-nurse"></i> Healthcare</span>
+                        </div>
+                        <h3>PRx Assist</h3>
+                        <p>Hospital patient management application for nurses.</p>
+                        <div class="project-card__store-links">
+                            <a href="https://play.google.com/store/apps/details?id=care.gho.patientJourneyManagementNurse" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--google">
+                                <i class="fab fa-google-play"></i> Get it on Google Play
+                            </a>
+                            <a href="https://apps.apple.com/us/app/prx-assist/id6744269321" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--apple">
+                                <i class="fab fa-apple"></i> Download on the App Store
+                            </a>
+                        </div>
+                        <div class="project-card__tags">
+                            <span>Flutter</span><span>Firebase</span><span>Riverpod</span><span>Provider</span>
+                        </div>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-card__top">
+                            <span class="project-card__icon-wrap"><img src="images/son.png" alt="SON app icon"
+                                    class="project-card__icon"></span>
+                            <span class="project-card__type"><i class="fas fa-stethoscope"></i> MedTech</span>
+                        </div>
+                        <h3>SON</h3>
+                        <p>Medical second-opinion and expert review platform.</p>
+                        <div class="project-card__store-links">
+                            <a href="https://play.google.com/store/apps/details?id=in.globalhealthopinion" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--google">
+                                <i class="fab fa-google-play"></i> Get it on Google Play
+                            </a>
+                            <a href="https://apps.apple.com/in/app/global-health-opinion/id6737268521" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--apple">
+                                <i class="fab fa-apple"></i> Download on the App Store
+                            </a>
+                        </div>
+                        <div class="project-card__tags"><span>Flutter</span><span>Firebase</span><span>Provider</span></div>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-card__top">
+                            <span class="project-card__icon-wrap"><img src="images/ghorx.png" alt="GHORx app icon"
+                                    class="project-card__icon"></span>
+                            <span class="project-card__type"><i class="fas fa-user-md"></i> MedTech</span>
+                        </div>
+                        <h3>GHORx</h3>
+                        <p>Doctor-focused application for reviewing patient cases.</p>
+                        <div class="project-card__store-links">
+                            <a href="https://play.google.com/store/apps/details?id=in.globalhealthopinionrx" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--google">
+                                <i class="fab fa-google-play"></i> Get it on Google Play
+                            </a>
+                            <a href="https://apps.apple.com/in/app/ghorx/id6737513683" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--apple">
+                                <i class="fab fa-apple"></i> Download on the App Store
+                            </a>
+                        </div>
+                        <div class="project-card__tags"><span>Flutter</span><span>Firebase</span><span>Bloc</span></div>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-card__top">
+                            <span class="project-card__icon-wrap"><img src="images/apollomuscat.png"
+                                    alt="ApolloMuscat app icon" class="project-card__icon"></span>
+                            <span class="project-card__type"><i class="fas fa-calendar-check"></i> Healthcare</span>
+                        </div>
+                        <h3>ApolloMuscat</h3>
+                        <p>Appointment booking and healthcare management application.</p>
+                        <div class="project-card__store-links">
+                            <a href="https://play.google.com/store/apps/details?id=com.gho.apollo" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--google">
+                                <i class="fab fa-google-play"></i> Get it on Google Play
+                            </a>
+                            <a href="https://apps.apple.com/us/app/apollo-muscat/id6757702959" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--apple">
+                                <i class="fab fa-apple"></i> Download on the App Store
+                            </a>
+                        </div>
+                        <div class="project-card__tags"><span>Flutter</span><span>Firebase</span><span>Provider</span></div>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-card__top">
+                            <span class="project-card__icon-wrap"><img src="images/thasallicare.png"
+                                    alt="Thasalli Care app icon" class="project-card__icon"></span>
+                            <span class="project-card__type"><i class="fas fa-calendar-alt"></i> Healthcare</span>
+                        </div>
+                        <h3>Thasalli Care</h3>
+                        <p>Simplifies healthcare with seamless scheduling and access to care.</p>
+                        <div class="project-card__store-links">
+                            <a href="https://play.google.com/store/apps/details?id=com.gho.thasallicare" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--google">
+                                <i class="fab fa-google-play"></i> Get it on Google Play
+                            </a>
+                            <a href="https://apps.apple.com/us/app/thasalli-care/id6757840085?l=pt-BR" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--apple">
+                                <i class="fab fa-apple"></i> Download on the App Store
+                            </a>
+                        </div>
+                        <div class="project-card__tags"><span>Flutter</span><span>Firebase</span></div>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-card__top">
+                            <span class="project-card__icon-wrap"><img src="images/txassist.png" alt="TX Assist app icon"
+                                    class="project-card__icon"></span>
+                            <span class="project-card__type"><i class="fas fa-clipboard-list"></i> Healthcare</span>
+                        </div>
+                        <h3>TX Assist</h3>
+                        <p>App for nurses, doctors, and admin to view patient appointment details.</p>
+                        <div class="project-card__store-links">
+                            <a href="https://play.google.com/store/apps/details?id=com.gho.txassist" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--google">
+                                <i class="fab fa-google-play"></i> Get it on Google Play
+                            </a>
+                            <a href="https://apps.apple.com/app/6755870859" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--apple">
+                                <i class="fab fa-apple"></i> Download on the App Store
+                            </a>
+                        </div>
+                        <div class="project-card__tags"><span>Flutter</span><span>Firebase</span><span>GetX</span></div>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-card__top">
+                            <span class="project-card__icon-emoji">💃</span>
+                            <span class="project-card__type"><i class="fas fa-music"></i> Booking</span>
+                        </div>
+                        <h3>Big Dance Centre</h3>
+                        <p>Dance academy management and class booking application.</p>
+                        <div class="project-card__tags"><span>Flutter</span><span>Provider</span></div>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-card__top">
+                            <span class="project-card__icon-wrap"><img src="images/lazypay.png" alt="LazyPay app icon"
+                                    class="project-card__icon"></span>
+                            <span class="project-card__type"><i class="fas fa-coins"></i> Fintech</span>
+                        </div>
+                        <h3>LazyPay</h3>
+                        <p>Fintech credit and instant loan application.</p>
+                        <div class="project-card__store-links">
+                            <a href="https://play.google.com/store/apps/details?id=com.citrus.citruspay" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--google">
+                                <i class="fab fa-google-play"></i> Get it on Google Play
+                            </a>
+                            <a href="https://apps.apple.com/in/app/lazypay-loan-app-pay-later/id1419990272" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--apple">
+                                <i class="fab fa-apple"></i> Download on the App Store
+                            </a>
+                        </div>
+                        <div class="project-card__tags"><span>Flutter</span><span>Bloc</span></div>
+                    </div>
+                    <div class="project-card" data-reveal>
+                        <div class="project-card__top">
+                            <span class="project-card__icon-wrap"><img src="images/crop-clinic.png" alt="Crop Clinic app icon"
+                                    class="project-card__icon"></span>
+                            <span class="project-card__type"><i class="fas fa-seedling"></i> AgriTech</span>
+                        </div>
+                        <h3>Crop Clinic</h3>
+                        <p>Agriculture support application for farmers.</p>
+                        <div class="project-card__store-links">
+                            <a href="https://play.google.com/store/apps/details?id=com.simplifykvk.kvk" target="_blank"
+                                rel="noopener noreferrer" class="store-link store-link--google">
+                                <i class="fab fa-google-play"></i> Get it on Google Play
+                            </a>
+                        </div>
+                        <div class="project-card__tags"><span>Flutter</span><span>Firebase</span><span>Provider</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+                <!-- Services -->
+        <section id="services" class="section">
+            <div class="container">
+                <div class="section__head" data-reveal>
+                    <span class="section__tag">05 · Services</span>
+                    <h2 class="section__title">How I can <span class="gradient-text">help you</span></h2>
+                </div>
+                <div class="services__grid">
+                    <div class="service-card" data-reveal>
+                        <div class="service-card__icon"><i class="fas fa-mobile-alt"></i></div>
+                        <div class="service-card__head">
+                            <h3>Mobile App Development</h3>
+                            <a href="#contact" class="service-card__link">Start a project <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <p>High-performance, cross-platform apps for iOS and Android built with Flutter.</p>
+                    </div>
+                    <div class="service-card" data-reveal>
+                        <div class="service-card__icon"><i class="fas fa-plug"></i></div>
+                        <div class="service-card__head">
+                            <h3>Backend Integration</h3>
+                            <a href="#contact" class="service-card__link">Start a project <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <p>Seamless integration of RESTful APIs, Firebase, and AWS services into your app.</p>
+                    </div>
+                    <div class="service-card" data-reveal>
+                        <div class="service-card__icon"><i class="fas fa-video"></i></div>
+                        <div class="service-card__head">
+                            <h3>Real-time Features</h3>
+                            <a href="#contact" class="service-card__link">Start a project <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <p>Video calling (Agora), chat, and live data sync for dynamic user experiences.</p>
+                    </div>
+                    <div class="service-card" data-reveal>
+                        <div class="service-card__icon"><i class="fas fa-rocket"></i></div>
+                        <div class="service-card__head">
+                            <h3>App Deployment</h3>
+                            <a href="#contact" class="service-card__link">Start a project <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <p>Full lifecycle management from development to publishing on Play and App Store.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+                <!-- Process -->
+        <section id="process" class="section">
+            <div class="container">
+                <div class="section__head" data-reveal>
+                    <span class="section__tag">06 · Process</span>
+                    <h2 class="section__title">How I <span class="gradient-text">work</span></h2>
+                    <p class="section__lead">A clear, end-to-end approach that takes your idea from concept to a
+                        production-ready app on the stores.</p>
+                </div>
+                <div class="process__grid">
+                    <div class="process__step" data-reveal>
+                        <span class="process__num">01</span>
+                        <div class="process__icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3>Discover</h3>
+                        <p>Understand your requirements, target users, and business goals to define a clear scope.</p>
+                    </div>
+                    <div class="process__step" data-reveal>
+                        <span class="process__num">02</span>
+                        <div class="process__icon"><i class="fas fa-pen-ruler"></i></div>
+                        <h3>Design</h3>
+                        <p>Craft intuitive, responsive interfaces and a scalable app architecture that feels native.</p>
+                    </div>
+                    <div class="process__step" data-reveal>
+                        <span class="process__num">03</span>
+                        <div class="process__icon"><i class="fas fa-code"></i></div>
+                        <h3>Develop</h3>
+                        <p>Build clean, secure, testable Flutter code with APIs, payments, notifications, and live data.</p>
+                    </div>
+                    <div class="process__step" data-reveal>
+                        <span class="process__num">04</span>
+                        <div class="process__icon"><i class="fas fa-rocket"></i></div>
+                        <h3>Deploy</h3>
+                        <p>Ship to the Google Play Store and Apple App Store, then maintain and optimize post-release.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+                <!-- Contact -->
+        <section id="contact" class="section section--alt">
+            <div class="container">
+                <div class="section__head section__head--center" data-reveal>
+                    <span class="section__tag">07 · Contact</span>
+                    <h2 class="section__title">Let's build something <span class="gradient-text">awesome</span></h2>
+                    <p class="section__lead">Looking for a Flutter Developer to build reliable, scalable, and
+                        high-performance mobile apps? I'd love to hear from you.</p>
+                </div>
+                <div class="contact__grid">
+                    <div class="contact__info" data-reveal>
+                        <div class="contact__card glow-card">
+                            <div class="contact__item">
+                                <div class="contact__icon"><i class="fas fa-envelope"></i></div>
+                                <div><span>Email me at</span><a href="mailto:rinshadmt20@gmail.com">rinshadmt20@gmail.com</a></div>
+                            </div>
+                            <div class="contact__item">
+                                <div class="contact__icon"><i class="fas fa-phone-alt"></i></div>
+                                <div><span>Call me at</span><a href="tel:+919048572066">+91 9048572066</a></div>
+                            </div>
+                            <div class="contact__item">
+                                <div class="contact__icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <div><span>Based in</span><p>Pattambi, Kerala, India</p></div>
+                            </div>
+                        </div>
+                        <div class="contact__social">
+                            <a href="https://www.linkedin.com/in/md-rinshad/" target="_blank"
+                                class="contact__social-btn contact__social-btn--linkedin">
+                                <i class="fab fa-linkedin-in"></i> LinkedIn
+                            </a>
+                            <a href="https://github.com/MohammedRinshad" target="_blank"
+                                class="contact__social-btn contact__social-btn--github">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                    <form class="contact__form glow-card" data-reveal id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" placeholder="Tell me about your project..." rows="5"
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--full submit-btn">
+                            <span>Send Message</span><i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+        <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer__inner">
+            <a href="#hero" class="header__logo">
+                <span class="header__logo-mark">M</span>
+                <span class="header__logo-text">rinshad.<span class="header__logo-accent">dev</span></span>
+            </a>
+            <p>&copy; 2026 Mohammed Rinshad MT. Crafted with <i class="fas fa-heart footer__heart"></i> and Flutter spirit.</p>
+            <a href="#hero" class="footer__back-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
+        </div>
+    </footer>
+
+
+    <button id="backTop" class="back-to-top" aria-label="Back to top">
+        <svg class="back-to-top__ring" viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="24" cy="24" r="20"></circle>
+        </svg>
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Custom Cursor (desktop only, injected by JS on fine pointers) -->
+    <div class="cursor cursor--dot" aria-hidden="true"></div>
+    <div class="cursor cursor--ring" aria-hidden="true"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
