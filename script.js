@@ -16,6 +16,12 @@
     statusInterval: 2600,
     counterDuration: 1600,
     formspreeId: 'xqpakgpk',
+    // Resume PDF served from GitHub via jsDelivr CDN (fast, global). Replace the
+    // file anytime by pushing to this URL — no code changes needed.
+    // Note: jsDelivr caches for ~24h, so a new push may take up to a day to go
+    // live. To refresh immediately after a push: curl https://purge.jsdelivr.net/gh/MohammedRinshad/portfolio@main/resume.pdf
+    resumeUrl: 'https://cdn.jsdelivr.net/gh/mdrinshad/portfolio@main/resume.pdf',
+    resumeFileName: 'Mohammed_Rinshad_Resume.pdf',
   };
 
   const ROLES = [
@@ -687,6 +693,66 @@
     },
   };
 
+  /**
+   * Resume Download (GitHub raw)
+   * Fetches the latest resume PDF straight from GitHub so it can be updated
+   * anytime by pushing a new file to CONFIG.resumeUrl — no code changes.
+   */
+  const ResumeDownload = {
+    init() {
+      this.btn = $('#resumeBtn');
+      if (!this.btn) return;
+
+      this.originalHTML = this.btn.innerHTML;
+
+      this.btn.addEventListener('click', (e) => this.handle(e));
+    },
+
+    async handle(e) {
+      e.preventDefault();
+      if (this.busy) return;
+
+      if (!CONFIG.resumeUrl) {
+        alert('Set CONFIG.resumeUrl in script.js to your resume PDF URL.');
+        return;
+      }
+
+      this.busy = true;
+      this.setLoading(true);
+
+      try {
+        const res = await fetch(CONFIG.resumeUrl, { cache: 'no-store' });
+        if (!res.ok) throw new Error('Download failed');
+        const blob = await res.blob();
+
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = CONFIG.resumeFileName;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(a.href);
+        this.setLoading(false, true);
+      } catch {
+        this.setLoading(false, false);
+      }
+
+      setTimeout(() => {
+        this.busy = false;
+        this.btn.innerHTML = this.originalHTML;
+      }, 2400);
+    },
+
+    setLoading(loading, ok) {
+      const text = loading
+        ? 'Downloading…'
+        : ok
+          ? 'Downloaded!'
+          : 'Failed — try again';
+      this.btn.innerHTML = `<i class="fas ${loading ? 'fa-spinner fa-spin' : ok ? 'fa-check' : 'fa-exclamation-triangle'}"></i> ${text}`;
+    },
+  };
+
   // ============================================
   // Bootstrap
   // ============================================
@@ -708,6 +774,7 @@
     Magnetic.init();
     HeroParallax.init();
     AuroraParallax.init();
+    ResumeDownload.init();
     ThemeToggle.init();
   };
 
