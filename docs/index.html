@@ -12,7 +12,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preload" as="image" href="images/about-photo.jpg" fetchpriority="high">
     <script>
         (function () {
             try {
@@ -164,7 +166,8 @@
                     <div class="hero__chip hero__chip--1"><i class="fab fa-flutter"></i> Flutter</div>
                     <div class="hero__photo-card">
                         <div class="about__photo">
-                            <img src="images/about-photo.jpg" alt="Mohammed Rinshad MT" class="about__photo-img" loading="lazy">
+                            <img src="images/about-photo.jpg" alt="Mohammed Rinshad MT" class="about__photo-img" width="480"
+                                height="360" fetchpriority="high" decoding="async">
                             <span class="about__photo-badge"><i class="fas fa-map-pin"></i> Kerala, India</span>
                             <span class="about__photo-status"><span class="about__photo-dot"></span> Available for work</span>
                         </div>

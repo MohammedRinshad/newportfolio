@@ -9,7 +9,7 @@
   // Config
   // ============================================
   const CONFIG = {
-    preloaderDelay: 600,
+    preloaderDelay: 300,
     typeSpeed: 75,
     deleteSpeed: 42,
     typePause: 1900,
@@ -636,16 +636,16 @@
   const HeroEntrance = {
     run() {
       $$('.hero__title .hero__line-inner').forEach((el, i) => {
-        el.style.setProperty('--d', `${(0.72 + i * 0.15).toFixed(2)}s`);
+        el.style.setProperty('--d', `${(0.2 + i * 0.12).toFixed(2)}s`);
       });
 
       $$('.hero [data-reveal]').forEach((el, i) => {
-        el.style.setProperty('--rd', `${(0.45 + i * 0.1).toFixed(2)}s`);
+        el.style.setProperty('--rd', `${(0.1 + i * 0.07).toFixed(2)}s`);
         el.classList.add('revealed');
       });
 
       $$('.hero__stat-num[data-count]').forEach((el) => {
-        setTimeout(() => Counter.animate(el), 1500);
+        setTimeout(() => Counter.animate(el), 900);
       });
     },
   };

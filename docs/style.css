@@ -2849,3 +2849,176 @@ html[data-theme='dark'] .project-card:hover {
         margin-top: 34px;
     }
 }
+
+/* ============================================
+   MOBILE RESPONSIVENESS — fluid across phone sizes
+   ============================================ */
+@media (max-width: 768px) {
+    .hero__title {
+        font-size: clamp(2.3rem, 12vw, 3rem);
+    }
+
+    .section__title {
+        font-size: clamp(1.7rem, 6.5vw, 2.3rem);
+    }
+
+    .hero__buttons {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 560px) {
+    .container {
+        padding: 0 1.1rem;
+    }
+
+    .hero {
+        padding: 110px 0 56px;
+    }
+
+    .hero__stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 1.2rem;
+    }
+
+    .hero__stat {
+        text-align: center;
+    }
+
+    .hero__stat-label {
+        font-size: 0.72rem;
+    }
+
+    .hero__title {
+        font-size: clamp(2.1rem, 13vw, 2.8rem);
+    }
+
+    .hero__buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero__buttons .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero__code-card {
+        padding: 1.2rem 1rem;
+    }
+
+    .hero__code-title {
+        font-size: 0.72rem;
+    }
+
+    .hero__greeting {
+        font-size: 0.75rem;
+    }
+
+    .project-card {
+        padding: 1.4rem;
+    }
+
+    .project-card__top {
+        gap: 0.8rem;
+    }
+
+    .about__cards {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-card,
+    .service-card {
+        padding: 1.4rem;
+    }
+
+    .timeline__head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+    }
+
+    .timeline__date {
+        white-space: normal;
+    }
+
+    .contact__form {
+        padding: 1.5rem;
+    }
+
+    .contact__card {
+        padding: 1.4rem;
+    }
+
+    .back-to-top {
+        right: 16px;
+        bottom: 16px;
+        width: 46px;
+        height: 46px;
+    }
+}
+
+@media (max-width: 400px) {
+    .header__nav {
+        padding: 0.9rem 0;
+    }
+
+    .header__logo-text {
+        font-size: 1rem;
+    }
+
+    .section {
+        padding: 3.6rem 0;
+    }
+
+    .hero__content {
+        gap: 2.4rem;
+    }
+
+    .hero__stat-num,
+    .hero__stat-plus {
+        font-size: 1.6rem;
+    }
+
+    .about__value {
+        padding: 1.4rem;
+    }
+
+    .timeline__item {
+        padding-left: 46px;
+        gap: 1.4rem;
+    }
+
+    .timeline::before {
+        left: 13px;
+    }
+
+    .timeline__dot {
+        width: 32px;
+        height: 32px;
+        font-size: 0.82rem;
+    }
+
+    .timeline__content {
+        padding: 1.2rem 1.1rem;
+    }
+
+    .projects__grid {
+        row-gap: 1.6rem;
+    }
+
+    .contact__social {
+        flex-direction: column;
+    }
+
+    .hero__photo-card {
+        margin-top: 24px;
+    }
+
+    .about__photo-badge,
+    .about__photo-status {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
+    }
+}
