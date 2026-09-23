@@ -13,6 +13,7 @@ import io
 import http.server
 import os
 import re
+import socket
 import sys
 
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8000
@@ -87,8 +88,14 @@ class SSIHandler(http.server.SimpleHTTPRequestHandler):
         return io.BytesIO(body)
 
 
+class DualStackServer(http.server.ThreadingHTTPServer):
+    address_family = socket.AF_INET6
+
+
 if __name__ == '__main__':
-    with http.server.HTTPServer(('', PORT), SSIHandler) as server:
+    host = '::' if socket.has_ipv6 else ''
+    server_cls = DualStackServer if socket.has_ipv6 else http.server.ThreadingHTTPServer
+    with server_cls((host, PORT), SSIHandler) as server:
         print(f'SSI server running at http://localhost:{PORT}')
         print('Serving with <!--#include --> support')
         try:
