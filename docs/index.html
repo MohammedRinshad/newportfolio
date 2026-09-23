@@ -10,9 +10,18 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap">
+    </noscript>
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preload" as="image" href="images/about-photo.jpg" fetchpriority="high">
     <script>
@@ -497,7 +506,7 @@
                     <div class="project-card project-card--featured" data-reveal>
                         <div class="project-card__top">
                             <span class="project-card__icon-wrap"><img src="images/mallu-cafe-radio.png"
-                                    alt="Mallu Cafe Radio USA app icon" class="project-card__icon"></span>
+                                    alt="Mallu Cafe Radio USA app icon" loading="lazy" decoding="async" class="project-card__icon"></span>
                             <span class="project-card__type"><i class="fas fa-radio"></i> Audio Streaming</span>
                         </div>
                         <h3>Mallu Cafe Radio <span class="intern-badge">USA</span></h3>
@@ -520,7 +529,7 @@
                     <div class="project-card" data-reveal>
                         <div class="project-card__top">
                             <span class="project-card__icon-wrap"><img src="images/aabindassist.png"
-                                    alt="Aabind Connect app icon" class="project-card__icon"></span>
+                                    alt="Aabind Connect app icon" loading="lazy" decoding="async" class="project-card__icon"></span>
                             <span class="project-card__type"><i class="fas fa-hospital-user"></i> Healthcare</span>
                         </div>
                         <h3>Aabind Connect</h3>
@@ -540,7 +549,7 @@
                     <div class="project-card" data-reveal>
                         <div class="project-card__top">
                             <span class="project-card__icon-wrap"><img src="images/aabindhospital.png"
-                                    alt="Aabind Hospital app icon" class="project-card__icon"></span>
+                                    alt="Aabind Hospital app icon" loading="lazy" decoding="async" class="project-card__icon"></span>
                             <span class="project-card__type"><i class="fas fa-hospital"></i> Healthcare</span>
                         </div>
                         <h3>Aabind Hospital</h3>
@@ -560,7 +569,7 @@
                     <div class="project-card" data-reveal>
                         <div class="project-card__top">
                             <span class="project-card__icon-wrap"><img src="images/prx-care.png" alt="PRx.Care app icon"
-                                    class="project-card__icon"></span>
+                                    loading="lazy" decoding="async" class="project-card__icon"></span>
                             <span class="project-card__type"><i class="fas fa-heartbeat"></i> Healthcare</span>
                         </div>
                         <h3>PRx.Care</h3>
@@ -583,7 +592,7 @@
                     <div class="project-card" data-reveal>
                         <div class="project-card__top">
                             <span class="project-card__icon-wrap"><img src="images/prx-assist.png" alt="PRx Assist app icon"
-                                    class="project-card__icon"></span>
+                                    loading="lazy" decoding="async" class="project-card__icon"></span>
                             <span class="project-card__type"><i class="fas fa-user-nurse"></i> Healthcare</span>
                         </div>
                         <h3>PRx Assist</h3>
@@ -605,7 +614,7 @@
                     <div class="project-card" data-reveal>
                         <div class="project-card__top">
                             <span class="project-card__icon-wrap"><img src="images/son.png" alt="SON app icon"
-                                    class="project-card__icon"></span>
+                                    loading="lazy" decoding="async" class="project-card__icon"></span>
                             <span class="project-card__type"><i class="fas fa-stethoscope"></i> MedTech</span>
                         </div>
                         <h3>SON</h3>
@@ -625,7 +634,7 @@
                     <div class="project-card" data-reveal>
                         <div class="project-card__top">
                             <span class="project-card__icon-wrap"><img src="images/ghorx.png" alt="GHORx app icon"
-                                    class="project-card__icon"></span>
+                                    loading="lazy" decoding="async" class="project-card__icon"></span>
                             <span class="project-card__type"><i class="fas fa-user-md"></i> MedTech</span>
                         </div>
                         <h3>GHORx</h3>
@@ -645,7 +654,7 @@
                     <div class="project-card" data-reveal>
                         <div class="project-card__top">
                             <span class="project-card__icon-wrap"><img src="images/apollomuscat.png"
-                                    alt="ApolloMuscat app icon" class="project-card__icon"></span>
+                                    alt="ApolloMuscat app icon" loading="lazy" decoding="async" class="project-card__icon"></span>
                             <span class="project-card__type"><i class="fas fa-calendar-check"></i> Healthcare</span>
                         </div>
                         <h3>ApolloMuscat</h3>
@@ -665,7 +674,7 @@
                     <div class="project-card" data-reveal>
                         <div class="project-card__top">
                             <span class="project-card__icon-wrap"><img src="images/thasallicare.png"
-                                    alt="Thasalli Care app icon" class="project-card__icon"></span>
+                                    alt="Thasalli Care app icon" loading="lazy" decoding="async" class="project-card__icon"></span>
                             <span class="project-card__type"><i class="fas fa-calendar-alt"></i> Healthcare</span>
                         </div>
                         <h3>Thasalli Care</h3>
@@ -685,7 +694,7 @@
                     <div class="project-card" data-reveal>
                         <div class="project-card__top">
                             <span class="project-card__icon-wrap"><img src="images/txassist.png" alt="TX Assist app icon"
-                                    class="project-card__icon"></span>
+                                    loading="lazy" decoding="async" class="project-card__icon"></span>
                             <span class="project-card__type"><i class="fas fa-clipboard-list"></i> Healthcare</span>
                         </div>
                         <h3>TX Assist</h3>
@@ -714,7 +723,7 @@
                     <div class="project-card" data-reveal>
                         <div class="project-card__top">
                             <span class="project-card__icon-wrap"><img src="images/lazypay.png" alt="LazyPay app icon"
-                                    class="project-card__icon"></span>
+                                    loading="lazy" decoding="async" class="project-card__icon"></span>
                             <span class="project-card__type"><i class="fas fa-coins"></i> Fintech</span>
                         </div>
                         <h3>LazyPay</h3>
@@ -734,7 +743,7 @@
                     <div class="project-card" data-reveal>
                         <div class="project-card__top">
                             <span class="project-card__icon-wrap"><img src="images/crop-clinic.png" alt="Crop Clinic app icon"
-                                    class="project-card__icon"></span>
+                                    loading="lazy" decoding="async" class="project-card__icon"></span>
                             <span class="project-card__type"><i class="fas fa-seedling"></i> AgriTech</span>
                         </div>
                         <h3>Crop Clinic</h3>
