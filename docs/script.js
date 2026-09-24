@@ -16,10 +16,6 @@
     statusInterval: 2600,
     counterDuration: 1600,
     formspreeId: 'xqpakgpk',
-    // Resume PDF served locally from the site root. Replace resume.pdf anytime —
-    // no code changes needed.
-    resumeUrl: 'resume.pdf',
-    resumeFileName: 'Mohammed_Rinshad_Resume.pdf',
   };
 
   const ROLES = [
@@ -703,9 +699,10 @@
   };
 
   /**
-   * Resume Download (GitHub raw)
-   * Fetches the latest resume PDF straight from GitHub so it can be updated
-   * anytime by pushing a new file to CONFIG.resumeUrl — no code changes.
+   * Resume Download
+   * Triggers the download by clicking a real <a download> link. No fetch,
+   * no CORS, nothing to fail: if JS ever broke, the button's native
+   * href/download attribute still downloads the PDF.
    */
   const ResumeDownload = {
     init() {
@@ -714,42 +711,23 @@
 
       this.originalHTML = this.btn.innerHTML;
 
-      this.btn.addEventListener('click', (e) => this.handle(e));
+      this.btn.addEventListener('click', () => this.handle());
     },
 
-    async handle(e) {
-      e.preventDefault();
+    handle() {
       if (this.busy) return;
-
-      if (!CONFIG.resumeUrl) {
-        alert('Set CONFIG.resumeUrl in script.js to your resume PDF URL.');
-        return;
-      }
-
       this.busy = true;
       this.setLoading(true);
 
-      try {
-        const res = await fetch(CONFIG.resumeUrl, { cache: 'no-store' });
-        if (!res.ok) throw new Error('Download failed');
-        const blob = await res.blob();
-
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = CONFIG.resumeFileName;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(a.href);
-        this.setLoading(false, true);
-      } catch {
-        this.setLoading(false, false);
-      }
-
+      // Let the default anchor navigation happen for the actual download.
+      // We keep the element, clearing busy once the download has started.
       setTimeout(() => {
-        this.busy = false;
-        this.btn.innerHTML = this.originalHTML;
-      }, 2400);
+        this.setLoading(false, true);
+        setTimeout(() => {
+          this.busy = false;
+          this.btn.innerHTML = this.originalHTML;
+        }, 2400);
+      }, 900);
     },
 
     setLoading(loading, ok) {
