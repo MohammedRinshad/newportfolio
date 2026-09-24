@@ -7,6 +7,9 @@
     <title>Mohammed Rinshad MT | Flutter Developer</title>
     <meta name="description"
         content="Portfolio of Mohammed Rinshad MT, a Flutter Developer specializing in scalable mobile applications for Android and iOS.">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='34' font-weight='700' fill='%23fff' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,6 +34,7 @@
                 var dark = t === 'dark';
                 document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
                 document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+                document.querySelector('meta[name="theme-color"]').content = dark ? '#070b18' : '#ffffff';
             } catch (e) {
                 document.documentElement.setAttribute('data-theme', 'light');
             }
@@ -69,6 +73,7 @@
                 <li><a href="#skills" class="header__link">Skills</a></li>
                 <li><a href="#experience" class="header__link">Experience</a></li>
                 <li><a href="#projects" class="header__link">Projects</a></li>
+                <li><a href="#demo" class="header__link">Live Demo</a></li>
                 <li><a href="#services" class="header__link">Services</a></li>
                 <li><a href="#process" class="header__link">Process</a></li>
                 <li><a href="#contact" class="btn btn--primary header__cta">Let's Talk</a></li>
@@ -122,8 +127,8 @@
                     </div>
                     <div class="hero__stats" data-reveal>
                         <div class="hero__stat">
-                            <span class="hero__stat-num" data-count="3">0</span><span class="hero__stat-plus">+</span>
-                            <span class="hero__stat-label">Years Experience</span>
+                            <span class="hero__stat-num" data-count="4">0</span><span class="hero__stat-plus">+</span>
+                            <span class="hero__stat-label">Years Flutter Experience</span>
                         </div>
                         <div class="hero__stat">
                             <span class="hero__stat-num" data-count="13">0</span><span class="hero__stat-plus">+</span>
@@ -190,7 +195,7 @@
             </a>
         </section>
 
-                <!-- Marquee -->
+        <!-- Marquee -->
         <div class="marquee" aria-hidden="true">
             <div class="marquee__track">
                 <span>Flutter</span><i class="fab fa-flutter"></i>
@@ -205,14 +210,9 @@
                 <span>Stripe</span><i class="fab fa-stripe"></i>
                 <span>CI / CD</span><i class="fas fa-infinity"></i>
                 <span>Firebase Cloud Messaging</span><i class="fas fa-bell"></i>
-                <span>MVC</span><i class="fas fa-diagram-project"></i>
                 <span>MVVM</span><i class="fas fa-sitemap"></i>
                 <span>Google Maps</span><i class="fas fa-map-marker-alt"></i>
-                <span>SQL</span><i class="fas fa-database"></i>
-                <span>Database Management</span><i class="fas fa-server"></i>
-                <span>Microsoft SQL Server</span><i class="fas fa-database"></i>
-                <span>SSMS</span><i class="fas fa-toolbox"></i>
-                <span>Stored Procedures</span><i class="fas fa-cogs"></i>
+                <span>Play Store &amp; App Store</span><i class="fab fa-apple"></i>
                 <span>Flutter</span><i class="fab fa-flutter"></i>
                 <span>Dart</span><i class="fas fa-code"></i>
                 <span>Riverpod</span><i class="fas fa-layer-group"></i>
@@ -225,17 +225,11 @@
                 <span>Stripe</span><i class="fab fa-stripe"></i>
                 <span>CI / CD</span><i class="fas fa-infinity"></i>
                 <span>Firebase Cloud Messaging</span><i class="fas fa-bell"></i>
-                <span>MVC</span><i class="fas fa-diagram-project"></i>
                 <span>MVVM</span><i class="fas fa-sitemap"></i>
                 <span>Google Maps</span><i class="fas fa-map-marker-alt"></i>
-                <span>SQL</span><i class="fas fa-database"></i>
-                <span>Database Management</span><i class="fas fa-server"></i>
-                <span>Microsoft SQL Server</span><i class="fas fa-database"></i>
-                <span>SSMS</span><i class="fas fa-toolbox"></i>
-                <span>Stored Procedures</span><i class="fas fa-cogs"></i>
+                <span>Play Store &amp; App Store</span><i class="fab fa-apple"></i>
             </div>
         </div>
-
                 <!-- About -->
         <section id="about" class="section">
             <div class="container">
@@ -245,7 +239,7 @@
                 </div>
                 <div class="about__grid">
                     <div class="about__text" data-reveal>
-                        <p>I'm a <strong>Flutter Developer with 3+ years of professional experience</strong> building,
+                        <p>I'm a <strong>Flutter Developer with 4+ years of professional experience</strong> building,
                             maintaining, and deploying high-quality cross-platform mobile applications for Android and
                             iOS. I enjoy turning ideas and business requirements into reliable, intuitive, and scalable
                             mobile experiences.</p>
@@ -760,11 +754,96 @@
             </div>
         </section>
 
+        <!-- Live Flutter Demo -->
+<section id="demo" class="section section--alt">
+    <div class="container">
+        <div class="section__head" data-reveal>
+            <span class="section__tag">05 · Live Demo</span>
+            <h2 class="section__title">Most portfolios <span class="gradient-text">show</span> apps.<br>This one <span class="gradient-text">runs</span> one.</h2>
+            <p class="section__lead">This isn't a screenshot. It's a working mini-app rendered right in the page —
+                with state, tasks, its own theme, and a hot-reload button. Tap it, break it, toggle it.</p>
+        </div>
+
+        <div class="demo__grid">
+            <div class="demo__stage" data-reveal>
+                <div class="demo__bracket demo__bracket--tl" aria-hidden="true"></div>
+                <div class="demo__bracket demo__bracket--br" aria-hidden="true"></div>
+                <div class="demo-shell" id="demoShell">
+                    <div class="demo-phone" id="demoPhone" role="img" aria-label="Interactive demo of a Flutter-style material app">
+                        <div class="demo-phone__speaker" aria-hidden="true"></div>
+                        <div class="demo-app demo-app--light" id="demoApp">
+                            <div class="demo-app__bar">
+                                <span class="demo-app__bar-dot" aria-hidden="true"></span>
+                                <span class="demo-app__bar-title">widget_lab.dart</span>
+                                <button class="demo-app__bar-theme" id="demoTheme" aria-label="Toggle the demo app theme">
+                                    <i class="fas fa-moon" id="demoThemeIcon"></i>
+                                </button>
+                            </div>
+
+                            <div class="demo-app__body">
+                                <div class="demo-card">
+                                    <span class="demo-card__label">State memory <span class="demo-chip" id="demoStateName">setState</span></span>
+                                    <div class="demo-counter">
+                                        <button class="demo-counter__btn" id="demoMinus" aria-label="Decrease counter"><i class="fas fa-minus"></i></button>
+                                        <span class="demo-counter__num" id="demoCount">2</span>
+                                        <button class="demo-counter__btn" id="demoPlus" aria-label="Increase counter"><i class="fas fa-plus"></i></button>
+                                        <button class="demo-fab" id="demoFab" aria-label="Reach for the FAB"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="demo-card demo-card--stack">
+                                    <span class="demo-card__label">Task queue</span>
+                                    <label class="demo-task">
+                                        <input type="checkbox" class="demo-task__check" id="demoTask1" checked>
+                                        <span class="demo-task__box" aria-hidden="true"><i class="fas fa-check"></i></span>
+                                        <span class="demo-task__text">Launch PRx.Care v2</span>
+                                    </label>
+                                    <label class="demo-task">
+                                        <input type="checkbox" class="demo-task__check" id="demoTask2">
+                                        <span class="demo-task__box" aria-hidden="true"><i class="fas fa-check"></i></span>
+                                        <span class="demo-task__text">A/B test onboarding</span>
+                                    </label>
+                                    <div class="demo-progress"><div class="demo-progress__fill" id="demoProgress"></div></div>
+                                    <span class="demo-progress__text" id="demoProgressText">0% shipped</span>
+                                </div>
+                            </div>
+
+                            <div class="demo-app__dock">
+                                <button class="demo-reload" id="demoReload" aria-label="Hot reload the demo">
+                                    <i class="fas fa-bolt"></i> <span>R · Hot Reload</span>
+                                </button>
+                            </div>
+
+                            <div class="demo-flash" id="demoFlash" aria-hidden="true"></div>
+                            <div class="demo-snack" id="demoSnack" role="status"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo__caption">↑ This block is interactive — click literally anything.</div>
+            </div>
+
+            <div class="demo__info" data-reveal>
+                <h3 class="demo__info-title">Why ship a <span class="gradient-text">living demo?</span></h3>
+                <p class="demo__info-text">Any resume can claim "4+ years of Flutter." Very few portfolios let you
+                    <em>touch</em> the result. This is a real widget tree with state (a counter &amp; task queue),
+                    hot-reload, and its own light/dark theme — the same things I build and ship into production apps
+                    every day.</p>
+                <ul class="demo__list">
+                    <li><i class="fas fa-wave-square"></i> <span><strong>State management</strong> — tap + and watch the widget rebuild in place, state preserved.</span></li>
+                    <li><i class="fas fa-moon"></i> <span><strong>Theming</strong> — the demo has its own dark mode, separate from the site's.</span></li>
+                    <li><i class="fas fa-bolt"></i> <span><strong>Hot reload</strong> — press R and see the frame refresh, just like a real Flutter session.</span></li>
+                    <li><i class="fas fa-mobile-alt"></i> <span><strong>Truly responsive</strong> — every section of this page, this one included, flexes from phone to monitor.</span></li>
+                </ul>
+                <a href="#contact" class="btn btn--primary demo__cta"><i class="fas fa-paper-plane"></i> Want UI like this in your app?</a>
+            </div>
+        </div>
+    </div>
+</section>
                 <!-- Services -->
         <section id="services" class="section">
             <div class="container">
                 <div class="section__head" data-reveal>
-                    <span class="section__tag">05 · Services</span>
+                    <span class="section__tag">06 · Services</span>
                     <h2 class="section__title">How I can <span class="gradient-text">help you</span></h2>
                 </div>
                 <div class="services__grid">
@@ -808,7 +887,7 @@
         <section id="process" class="section">
             <div class="container">
                 <div class="section__head" data-reveal>
-                    <span class="section__tag">06 · Process</span>
+                    <span class="section__tag">07 · Process</span>
                     <h2 class="section__title">How I <span class="gradient-text">work</span></h2>
                     <p class="section__lead">A clear, end-to-end approach that takes your idea from concept to a
                         production-ready app on the stores.</p>
@@ -846,7 +925,7 @@
         <section id="contact" class="section section--alt">
             <div class="container">
                 <div class="section__head section__head--center" data-reveal>
-                    <span class="section__tag">07 · Contact</span>
+                    <span class="section__tag">08 · Contact</span>
                     <h2 class="section__title">Let's build something <span class="gradient-text">awesome</span></h2>
                     <p class="section__lead">Looking for a Flutter Developer to build reliable, scalable, and
                         high-performance mobile apps? I'd love to hear from you.</p>

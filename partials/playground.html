@@ -1,0 +1,85 @@
+<!-- Live Flutter Demo -->
+<section id="demo" class="section section--alt">
+    <div class="container">
+        <div class="section__head" data-reveal>
+            <span class="section__tag">05 · Live Demo</span>
+            <h2 class="section__title">Most portfolios <span class="gradient-text">show</span> apps.<br>This one <span class="gradient-text">runs</span> one.</h2>
+            <p class="section__lead">This isn't a screenshot. It's a working mini-app rendered right in the page —
+                with state, tasks, its own theme, and a hot-reload button. Tap it, break it, toggle it.</p>
+        </div>
+
+        <div class="demo__grid">
+            <div class="demo__stage" data-reveal>
+                <div class="demo__bracket demo__bracket--tl" aria-hidden="true"></div>
+                <div class="demo__bracket demo__bracket--br" aria-hidden="true"></div>
+                <div class="demo-shell" id="demoShell">
+                    <div class="demo-phone" id="demoPhone" role="img" aria-label="Interactive demo of a Flutter-style material app">
+                        <div class="demo-phone__speaker" aria-hidden="true"></div>
+                        <div class="demo-app demo-app--light" id="demoApp">
+                            <div class="demo-app__bar">
+                                <span class="demo-app__bar-dot" aria-hidden="true"></span>
+                                <span class="demo-app__bar-title">widget_lab.dart</span>
+                                <button class="demo-app__bar-theme" id="demoTheme" aria-label="Toggle the demo app theme">
+                                    <i class="fas fa-moon" id="demoThemeIcon"></i>
+                                </button>
+                            </div>
+
+                            <div class="demo-app__body">
+                                <div class="demo-card">
+                                    <span class="demo-card__label">State memory <span class="demo-chip" id="demoStateName">setState</span></span>
+                                    <div class="demo-counter">
+                                        <button class="demo-counter__btn" id="demoMinus" aria-label="Decrease counter"><i class="fas fa-minus"></i></button>
+                                        <span class="demo-counter__num" id="demoCount">2</span>
+                                        <button class="demo-counter__btn" id="demoPlus" aria-label="Increase counter"><i class="fas fa-plus"></i></button>
+                                        <button class="demo-fab" id="demoFab" aria-label="Reach for the FAB"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="demo-card demo-card--stack">
+                                    <span class="demo-card__label">Task queue</span>
+                                    <label class="demo-task">
+                                        <input type="checkbox" class="demo-task__check" id="demoTask1" checked>
+                                        <span class="demo-task__box" aria-hidden="true"><i class="fas fa-check"></i></span>
+                                        <span class="demo-task__text">Launch PRx.Care v2</span>
+                                    </label>
+                                    <label class="demo-task">
+                                        <input type="checkbox" class="demo-task__check" id="demoTask2">
+                                        <span class="demo-task__box" aria-hidden="true"><i class="fas fa-check"></i></span>
+                                        <span class="demo-task__text">A/B test onboarding</span>
+                                    </label>
+                                    <div class="demo-progress"><div class="demo-progress__fill" id="demoProgress"></div></div>
+                                    <span class="demo-progress__text" id="demoProgressText">0% shipped</span>
+                                </div>
+                            </div>
+
+                            <div class="demo-app__dock">
+                                <button class="demo-reload" id="demoReload" aria-label="Hot reload the demo">
+                                    <i class="fas fa-bolt"></i> <span>R · Hot Reload</span>
+                                </button>
+                            </div>
+
+                            <div class="demo-flash" id="demoFlash" aria-hidden="true"></div>
+                            <div class="demo-snack" id="demoSnack" role="status"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo__caption">↑ This block is interactive — click literally anything.</div>
+            </div>
+
+            <div class="demo__info" data-reveal>
+                <h3 class="demo__info-title">Why ship a <span class="gradient-text">living demo?</span></h3>
+                <p class="demo__info-text">Any resume can claim "4+ years of Flutter." Very few portfolios let you
+                    <em>touch</em> the result. This is a real widget tree with state (a counter &amp; task queue),
+                    hot-reload, and its own light/dark theme — the same things I build and ship into production apps
+                    every day.</p>
+                <ul class="demo__list">
+                    <li><i class="fas fa-wave-square"></i> <span><strong>State management</strong> — tap + and watch the widget rebuild in place, state preserved.</span></li>
+                    <li><i class="fas fa-moon"></i> <span><strong>Theming</strong> — the demo has its own dark mode, separate from the site's.</span></li>
+                    <li><i class="fas fa-bolt"></i> <span><strong>Hot reload</strong> — press R and see the frame refresh, just like a real Flutter session.</span></li>
+                    <li><i class="fas fa-mobile-alt"></i> <span><strong>Truly responsive</strong> — every section of this page, this one included, flexes from phone to monitor.</span></li>
+                </ul>
+                <a href="#contact" class="btn btn--primary demo__cta"><i class="fas fa-paper-plane"></i> Want UI like this in your app?</a>
+            </div>
+        </div>
+    </div>
+</section>

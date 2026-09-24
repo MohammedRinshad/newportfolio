@@ -16,11 +16,9 @@
     statusInterval: 2600,
     counterDuration: 1600,
     formspreeId: 'xqpakgpk',
-    // Resume PDF served from GitHub via jsDelivr CDN (fast, global). Replace the
-    // file anytime by pushing to this URL — no code changes needed.
-    // Note: jsDelivr caches for ~24h, so a new push may take up to a day to go
-    // live. To refresh immediately after a push: curl https://purge.jsdelivr.net/gh/MohammedRinshad/portfolio@main/resume.pdf
-    resumeUrl: 'https://cdn.jsdelivr.net/gh/mdrinshad/portfolio@main/resume.pdf',
+    // Resume PDF served locally from the site root. Replace resume.pdf anytime —
+    // no code changes needed.
+    resumeUrl: 'resume.pdf',
     resumeFileName: 'Mohammed_Rinshad_Resume.pdf',
   };
 
@@ -675,6 +673,17 @@
     apply(theme) {
       document.documentElement.dataset.theme = theme;
       document.documentElement.style.colorScheme = theme;
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.content = theme === 'dark' ? '#070b18' : '#ffffff';
+
+      // Freeze CSS transitions for the swap so no text is caught mid-fade
+      // blending into the old/new background.
+      document.documentElement.classList.add('theme-switching');
+      clearTimeout(this._guardTimer);
+      this._guardTimer = setTimeout(() => {
+        document.documentElement.classList.remove('theme-switching');
+      }, 420);
+
       if (!this.btn) return;
       const icon = this.btn.querySelector('i');
       if (icon) {
@@ -753,6 +762,106 @@
     },
   };
 
+  /**
+   * Live Flutter Demo
+   * Wires up the interactive mini-app: counter, task queue, its own
+   * light/dark theme and a mock hot-reload — a working widget tree.
+   */
+  const LiveDemo = {
+    init() {
+      this.app = $('#demoApp');
+      if (!this.app) return;
+
+      this.countEl = $('#demoCount');
+      this.stateNameEl = $('#demoStateName');
+      this.progressEl = $('#demoProgress');
+      this.progressTextEl = $('#demoProgressText');
+      this.flashEl = $('#demoFlash');
+      this.snackEl = $('#demoSnack');
+      this.themeBtn = $('#demoTheme');
+      this.themeIcon = $('#demoThemeIcon');
+
+      this.count = parseInt(this.countEl.textContent, 10) || 0;
+      this.snackTimer = null;
+
+      $('#demoPlus').addEventListener('click', () => this.bump(1));
+      $('#demoFab').addEventListener('click', () => this.bump(1));
+      $('#demoMinus').addEventListener('click', () => this.bump(-1));
+      $('#demoReload').addEventListener('click', () => this.reload());
+
+      ['#demoTask1', '#demoTask2'].forEach((sel) => {
+        $(sel).addEventListener('change', () => {
+          this.render();
+          const done = this.doneTasks();
+          this.snack(`✓ Task ${done}/2 ${done === 2 ? ' — all done!' : `completed (${done}/2)`}`);
+        });
+      });
+
+      if (this.themeBtn) {
+        this.themeBtn.addEventListener('click', () => {
+          const dark = this.app.classList.toggle('demo-app--dark');
+          this.themeIcon.className = dark ? 'fas fa-sun' : 'fas fa-moon';
+          this.snack(`Demo theme → ${dark ? 'dark' : 'light'}`);
+        });
+      }
+
+      this.render();
+    },
+
+    bump(delta) {
+      this.count = Math.max(0, this.count + delta);
+      this.render(true);
+    },
+
+    doneTasks() {
+      return [1, 2].filter((n) => $(`#demoTask${n}`).checked).length;
+    },
+
+    render(pop) {
+      this.countEl.textContent = this.count;
+
+      const names = ['setState', 'Provider', 'Riverpod', 'Bloc'];
+      const idx = this.count < 5 ? 0 : this.count < 10 ? 1 : this.count < 20 ? 2 : 3;
+      if (this.stateNameEl.textContent !== names[idx]) {
+        this.stateNameEl.textContent = names[idx];
+        this.stateNameEl.classList.remove('chipPop');
+        void this.stateNameEl.offsetWidth;
+        this.stateNameEl.classList.add('chipPop');
+      }
+
+      const done = this.doneTasks();
+      const pct = Math.round((done / 2) * 0.55 * 100 + (Math.min(this.count, 20) / 20) * 0.45 * 100);
+      this.progressEl.style.width = `${Math.min(pct, 100)}%`;
+      this.progressTextEl.textContent = `${pct}% shipped · ${done}/2 tasks done`;
+
+      if (pop && this.countEl) {
+        this.countEl.classList.remove('bump');
+        void this.countEl.offsetWidth;
+        this.countEl.classList.add('bump');
+      }
+    },
+
+    reload() {
+      if (this.flashEl) {
+        this.flashEl.classList.remove('active');
+        void this.flashEl.offsetWidth;
+        this.flashEl.classList.add('active');
+        setTimeout(() => this.flashEl.classList.remove('active'), 450);
+      }
+      const ms = 30 + Math.round(Math.random() * 45);
+      this.snack(`⚡ Hot reloaded in ${ms} ms`);
+      this.render(true);
+    },
+
+    snack(message) {
+      if (!this.snackEl) return;
+      this.snackEl.textContent = message;
+      this.snackEl.classList.add('show');
+      clearTimeout(this.snackTimer);
+      this.snackTimer = setTimeout(() => this.snackEl.classList.remove('show'), 1800);
+    },
+  };
+
   // ============================================
   // Bootstrap
   // ============================================
@@ -776,6 +885,7 @@
     AuroraParallax.init();
     ResumeDownload.init();
     ThemeToggle.init();
+    LiveDemo.init();
   };
 
   document.addEventListener('DOMContentLoaded', init);
