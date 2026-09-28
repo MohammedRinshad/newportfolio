@@ -20,7 +20,7 @@ OUT = os.path.join(BASE, 'docs')
 # Open Graph and canonical tags require absolute URLs, so this is substituted
 # into the {{SITE_URL}} placeholders in index.html. Update it if the site
 # moves to a custom domain or a different host.
-SITE_URL = 'https://mdrinshad.github.io/portfolio'
+SITE_URL = 'https://newportfolio-swart-gamma.vercel.app'
 
 INCLUDE_RE = re.compile(r'<!--#include\s+file="([^"]+)"\s*-->')
 

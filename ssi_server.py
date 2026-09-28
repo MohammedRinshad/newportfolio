@@ -21,7 +21,7 @@ PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8000
 INCLUDE_RE = re.compile(r'<!--#include\s+file="([^"]+)"\s*-->')
 
 # Kept in sync with build.py so the dev server and the built site agree.
-SITE_URL = 'https://mdrinshad.github.io/portfolio'
+SITE_URL = 'https://newportfolio-swart-gamma.vercel.app'
 
 
 class SSIHandler(http.server.SimpleHTTPRequestHandler):
