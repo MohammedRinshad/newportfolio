@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python (build.py / ssi_server.py)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Logs and editor cruft
+*.log
+Thumbs.db
+.idea/
+.vscode/

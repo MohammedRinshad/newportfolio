@@ -20,6 +20,9 @@ PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8000
 
 INCLUDE_RE = re.compile(r'<!--#include\s+file="([^"]+)"\s*-->')
 
+# Kept in sync with build.py so the dev server and the built site agree.
+SITE_URL = 'https://mdrinshad.github.io/portfolio'
+
 
 class SSIHandler(http.server.SimpleHTTPRequestHandler):
     def _resolve_includes(self, rel_path, content, seen=None):
@@ -42,7 +45,7 @@ class SSIHandler(http.server.SimpleHTTPRequestHandler):
                 sub = f.read()
             return self._resolve_includes(inc_rel_from_base, sub, seen | {real})
 
-        return INCLUDE_RE.sub(repl, content)
+        return INCLUDE_RE.sub(repl, content).replace('{{SITE_URL}}', SITE_URL)
 
     def guess_type(self, path):
         if path.endswith(('.html', '.htm')):

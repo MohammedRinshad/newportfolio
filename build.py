@@ -16,6 +16,12 @@ import shutil
 BASE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(BASE, 'docs')
 
+# Absolute origin of the deployed site, without a trailing slash.
+# Open Graph and canonical tags require absolute URLs, so this is substituted
+# into the {{SITE_URL}} placeholders in index.html. Update it if the site
+# moves to a custom domain or a different host.
+SITE_URL = 'https://mdrinshad.github.io/portfolio'
+
 INCLUDE_RE = re.compile(r'<!--#include\s+file="([^"]+)"\s*-->')
 
 # Top-level items to copy as-is (whole files or dirs) into docs/
@@ -53,6 +59,7 @@ def main():
     with open(index, encoding='utf-8') as f:
         content = f.read()
     content = resolve_includes('index.html', content)
+    content = content.replace('{{SITE_URL}}', SITE_URL)
     with open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(content)
     print(f'Built {os.path.relpath(os.path.join(OUT, "index.html"), BASE)}')

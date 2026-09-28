@@ -16,6 +16,13 @@
     statusInterval: 2600,
     counterDuration: 1600,
     formspreeId: 'xqpakgpk',
+    resumeFile: 'Mohammed_Rinshad_Resume.pdf',
+    // Served from GitHub via jsDelivr: CORS-enabled (*), no GitHub rate
+    // limits, edge-cached. Falls back to the local copy if unreachable.
+    resumeSources: [
+      'https://cdn.jsdelivr.net/gh/MohammedRinshad/newportfolio@main/resume.pdf',
+      'resume.pdf',
+    ],
   };
 
   const ROLES = [
@@ -40,6 +47,13 @@
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
+  // Older Safari (<12.1), Chrome (<51) and some Android in-app webviews have
+  // no IntersectionObserver. Any module that constructs one unguarded throws,
+  // which used to abort the whole init chain and silently kill every module
+  // after it — including the resume button and the theme toggle. Detect once
+  // here so the two call sites can fall back to showing content immediately.
+  const HAS_IO = typeof window.IntersectionObserver === 'function';
+
   // ============================================
   // UI Modules
   // ============================================
@@ -52,7 +66,8 @@
   const Preloader = {
     init() {
       setTimeout(() => {
-        $('.preloader').classList.add('hidden');
+        const preloader = $('.preloader');
+        if (preloader) preloader.classList.add('hidden');
         document.body.classList.add('loaded');
         HeroEntrance.run();
       }, CONFIG.preloaderDelay);
@@ -223,6 +238,10 @@
    */
   const RevealOnScroll = {
     init() {
+      // No observer support: reveal everything at once rather than leaving
+      // [data-reveal] content permanently invisible.
+      if (!HAS_IO) return this.revealAll();
+
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -245,6 +264,14 @@
         observer.observe(el);
       });
     },
+
+    revealAll() {
+      $$('[data-reveal]').forEach((el) => {
+        el.classList.add('revealed');
+        if (el.classList.contains('hero__stat-num')) Counter.animate(el);
+        el.removeAttribute('data-reveal');
+      });
+    },
   };
 
   /**
@@ -253,34 +280,48 @@
    */
   const SkillBars = {
     init() {
+      const cards = $$('.skill-card');
+
+      // The percent labels do not depend on the observer, so build them first.
+      cards.forEach((card) => this.addPercents(card));
+
+      if (!HAS_IO) {
+        cards.forEach((card) => this.fill(card));
+        return;
+      }
+
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              const card = entry.target;
-              card.classList.add('in-view');
-              card.querySelectorAll('.bar span').forEach((bar) => {
-                const width = (bar.getAttribute('style') || '').match(/width:(\d+)%/);
-                if (width) bar.style.width = `${width[1]}%`;
-              });
-              observer.unobserve(card);
+              this.fill(entry.target);
+              observer.unobserve(entry.target);
             }
           });
         },
         { threshold: 0.3 }
       );
 
-      $$('.skill-card').forEach((card) => {
-        card.querySelectorAll('.bar').forEach((bar) => {
-          const fill = bar.querySelector('span');
-          const width = (fill && (fill.getAttribute('style') || '').match(/width:(\d+)%/));
-          if (!width) return;
-          const percent = document.createElement('span');
-          percent.className = 'skill-card__percent';
-          percent.textContent = `${width[1]}%`;
-          bar.closest('li').appendChild(percent);
-        });
-        observer.observe(card);
+      cards.forEach((card) => observer.observe(card));
+    },
+
+    fill(card) {
+      card.classList.add('in-view');
+      card.querySelectorAll('.bar span').forEach((bar) => {
+        const width = (bar.getAttribute('style') || '').match(/width:(\d+)%/);
+        if (width) bar.style.width = `${width[1]}%`;
+      });
+    },
+
+    addPercents(card) {
+      card.querySelectorAll('.bar').forEach((bar) => {
+        const fill = bar.querySelector('span');
+        const width = (fill && (fill.getAttribute('style') || '').match(/width:(\d+)%/));
+        if (!width) return;
+        const percent = document.createElement('span');
+        percent.className = 'skill-card__percent';
+        percent.textContent = `${width[1]}%`;
+        bar.closest('li').appendChild(percent);
       });
     },
   };
@@ -700,9 +741,15 @@
 
   /**
    * Resume Download
-   * Triggers the download by clicking a real <a download> link. No fetch,
-   * no CORS, nothing to fail: if JS ever broke, the button's native
-   * href/download attribute still downloads the PDF.
+   * The PDF is served from GitHub via jsDelivr, which returns
+   * `Access-Control-Allow-Origin: *`. That CORS header is what lets us read
+   * the file as a blob and force a real save dialog, because browsers ignore
+   * the `download` attribute on cross-origin links.
+   *
+   * iOS Safari does not honour `download` for blob URLs, so there we let the
+   * link navigate natively and the PDF opens in the viewer instead. If every
+   * source fails we fall back to opening the CDN URL in a new tab, so a tap
+   * always does something useful.
    */
   const ResumeDownload = {
     init() {
@@ -710,24 +757,77 @@
       if (!this.btn) return;
 
       this.originalHTML = this.btn.innerHTML;
+      this.sources = CONFIG.resumeSources;
 
-      this.btn.addEventListener('click', () => this.handle());
+      this.btn.addEventListener('click', (e) => this.handle(e));
     },
 
-    handle() {
+    handle(event) {
       if (this.busy) return;
+      if (this.opensInViewer()) return;
+
+      if (event) event.preventDefault();
       this.busy = true;
       this.setLoading(true);
 
-      // Let the default anchor navigation happen for the actual download.
-      // We keep the element, clearing busy once the download has started.
+      this.fetchBlob()
+        .then((blob) => this.saveBlob(blob))
+        .then(() => {
+          this.setLoading(false, true);
+          this.resetLater(2400);
+        })
+        .catch(() => {
+          this.fallback();
+          this.setLoading(false, false);
+          this.resetLater(3000);
+        });
+    },
+
+    // Ordered by reliability: the CDN first, the local copy as a backstop.
+    fetchBlob() {
+      const tryNext = (index) => {
+        if (index >= this.sources.length) {
+          return Promise.reject(new Error('All resume sources failed'));
+        }
+        return fetch(this.sources[index], { mode: 'cors' })
+          .then((res) => {
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return res.blob();
+          })
+          .catch(() => tryNext(index + 1));
+      };
+      return tryNext(0);
+    },
+
+    saveBlob(blob) {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = CONFIG.resumeFile;
+      link.rel = 'noopener';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 30000);
+    },
+
+    fallback() {
+      window.open(this.sources[0], '_blank', 'noopener');
+    },
+
+    // Blob downloads are unreliable on iOS, so let the native PDF viewer work.
+    opensInViewer() {
+      const ua = navigator.userAgent || '';
+      const iOS = /iPad|iPhone|iPod/.test(ua) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      return iOS || typeof URL.createObjectURL !== 'function';
+    },
+
+    resetLater(delay) {
       setTimeout(() => {
-        this.setLoading(false, true);
-        setTimeout(() => {
-          this.busy = false;
-          this.btn.innerHTML = this.originalHTML;
-        }, 2400);
-      }, 900);
+        this.busy = false;
+        this.btn.innerHTML = this.originalHTML;
+      }, delay);
     },
 
     setLoading(loading, ok) {
@@ -735,8 +835,8 @@
         ? 'Downloading…'
         : ok
           ? 'Downloaded!'
-          : 'Failed — try again';
-      this.btn.innerHTML = `<i class="fas ${loading ? 'fa-spinner fa-spin' : ok ? 'fa-check' : 'fa-exclamation-triangle'}"></i> ${text}`;
+          : 'Opened in new tab';
+      this.btn.innerHTML = `<i class="fas ${loading ? 'fa-spinner fa-spin' : ok ? 'fa-check' : 'fa-external-link-alt'}"></i> ${text}`;
     },
   };
 
@@ -844,26 +944,39 @@
   // Bootstrap
   // ============================================
   const init = () => {
-    Preloader.init();
-    MobileNav.init();
-    ScrollEffects.init();
-    TypeWriter.init();
-    StatusRotator.init();
-    RevealOnScroll.init();
-    SkillBars.init();
-    TimelineProgress.init();
-    CursorGlow.init();
-    ContactForm.init();
-    ScrollProgress.init();
-    Tilt3D.init();
-    BackToTop.init();
-    CustomCursor.init();
-    Magnetic.init();
-    HeroParallax.init();
-    AuroraParallax.init();
-    ResumeDownload.init();
-    ThemeToggle.init();
-    LiveDemo.init();
+    // Every module is isolated. A single throw — an unsupported API, a
+    // renamed selector — must not prevent the modules after it from starting,
+    // so each one is wrapped and failures are reported instead of swallowed.
+    const modules = [
+      ['Preloader', Preloader],
+      ['MobileNav', MobileNav],
+      ['ScrollEffects', ScrollEffects],
+      ['TypeWriter', TypeWriter],
+      ['StatusRotator', StatusRotator],
+      ['RevealOnScroll', RevealOnScroll],
+      ['SkillBars', SkillBars],
+      ['TimelineProgress', TimelineProgress],
+      ['CursorGlow', CursorGlow],
+      ['ContactForm', ContactForm],
+      ['ScrollProgress', ScrollProgress],
+      ['Tilt3D', Tilt3D],
+      ['BackToTop', BackToTop],
+      ['CustomCursor', CustomCursor],
+      ['Magnetic', Magnetic],
+      ['HeroParallax', HeroParallax],
+      ['AuroraParallax', AuroraParallax],
+      ['ResumeDownload', ResumeDownload],
+      ['ThemeToggle', ThemeToggle],
+      ['LiveDemo', LiveDemo],
+    ];
+
+    modules.forEach(([name, module]) => {
+      try {
+        module.init();
+      } catch (err) {
+        console.warn(`[portfolio] ${name} failed to initialise:`, err);
+      }
+    });
   };
 
   document.addEventListener('DOMContentLoaded', init);
