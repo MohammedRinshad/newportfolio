@@ -66,7 +66,14 @@ class SSIHandler(http.server.SimpleHTTPRequestHandler):
         ctype = self.guess_type(path)
 
         try:
-            if ctype.startswith('text/') or ctype.startswith('application/javascript'):
+            # Read as text for anything we may need to rewrite ({{SITE_URL}} and
+            # <!--#include -->). Note .xml resolves to application/xml, not
+            # text/*, so it has to be matched explicitly.
+            is_text = (ctype.startswith('text/')
+                       or ctype.startswith('application/javascript')
+                       or ctype.startswith('application/xml')
+                       or ctype.endswith('+xml'))
+            if is_text:
                 with open(path, encoding='utf-8') as f:
                     content = f.read()
                 rel_path = os.path.relpath(path, os.path.dirname(os.path.abspath(__file__)))

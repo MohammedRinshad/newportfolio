@@ -25,7 +25,10 @@ SITE_URL = 'https://newportfolio-swart-gamma.vercel.app'
 INCLUDE_RE = re.compile(r'<!--#include\s+file="([^"]+)"\s*-->')
 
 # Top-level items to copy as-is (whole files or dirs) into docs/
-STATIC = ['style.css', 'script.js', 'images', 'resume.pdf']
+STATIC = ['style.css', 'script.js', 'images', 'resume.pdf', 'robots.txt', 'sitemap.xml']
+
+# Text files that carry {{SITE_URL}} placeholders, substituted at build time.
+TEXT_WITH_SITE_URL = {'robots.txt', 'sitemap.xml'}
 
 
 def resolve_includes(rel_path, content, seen=None):
@@ -72,6 +75,11 @@ def main():
             continue
         if os.path.isdir(src):
             shutil.copytree(src, dst)
+        elif item in TEXT_WITH_SITE_URL:
+            with open(src, encoding='utf-8') as f:
+                text = f.read().replace('{{SITE_URL}}', SITE_URL)
+            with open(dst, 'w', encoding='utf-8') as f:
+                f.write(text)
         else:
             shutil.copy2(src, dst)
         print(f'  copied {item}')

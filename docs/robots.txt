@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://newportfolio-swart-gamma.vercel.app/sitemap.xml

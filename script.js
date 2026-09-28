@@ -96,12 +96,14 @@
 
     open() {
       this.hamburger.classList.add('open');
+      this.hamburger.setAttribute('aria-expanded', 'true');
       this.navLinks.classList.add('open');
       document.body.style.overflow = 'hidden';
     },
 
     close() {
       this.hamburger.classList.remove('open');
+      this.hamburger.setAttribute('aria-expanded', 'false');
       this.navLinks.classList.remove('open');
       document.body.style.overflow = '';
     },
