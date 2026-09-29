@@ -17,10 +17,9 @@
     counterDuration: 1600,
     formspreeId: 'xqpakgpk',
     resumeFile: 'Mohammed_Rinshad_Resume.pdf',
-    // Served from GitHub via jsDelivr: CORS-enabled (*), no GitHub rate
-    // limits, edge-cached. Falls back to the local copy if unreachable.
+    // Same-origin only: the PDF ships with the site, so the fetch is always
+    // CORS-safe and works for every visitor regardless of CDN reachability.
     resumeSources: [
-      'https://cdn.jsdelivr.net/gh/MohammedRinshad/newportfolio@main/resume.pdf',
       'resume.pdf',
     ],
   };
@@ -743,14 +742,13 @@
 
   /**
    * Resume Download
-   * The PDF is served from GitHub via jsDelivr, which returns
-   * `Access-Control-Allow-Origin: *`. That CORS header is what lets us read
-   * the file as a blob and force a real save dialog, because browsers ignore
-   * the `download` attribute on cross-origin links.
+   * The PDF is served from our own origin, so the fetch is CORS-safe and the
+   * `download` attribute is honoured, which lets us read the file as a blob
+   * and force a save dialog with the filename from CONFIG.resumeFile.
    *
    * iOS Safari does not honour `download` for blob URLs, so there we let the
-   * link navigate natively and the PDF opens in the viewer instead. If every
-   * source fails we fall back to opening the CDN URL in a new tab, so a tap
+   * link navigate natively and the PDF opens in the viewer instead. If the
+   * fetch fails we fall back to opening the PDF in a new tab, so a tap
    * always does something useful.
    */
   const ResumeDownload = {
@@ -785,7 +783,7 @@
         });
     },
 
-    // Ordered by reliability: the CDN first, the local copy as a backstop.
+    // Ordered by reliability: same-origin first, extra mirrors as backstops.
     fetchBlob() {
       const tryNext = (index) => {
         if (index >= this.sources.length) {
